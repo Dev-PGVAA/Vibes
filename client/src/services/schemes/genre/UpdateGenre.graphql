@@ -1,0 +1,8 @@
+mutation UpdateGenre($data: UpdateGenreInput!) {
+	UpdateGenre(data: $data) {
+		id
+		title
+		slug
+		description
+	}
+}

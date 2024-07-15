@@ -1,0 +1,9 @@
+mutation UpdateTrack($data: UpdateTrackInput!) {
+	UpdateTrack(data: $data) {
+		name
+		duration
+		cover
+		audio
+		isHaveAgeLimit
+	}
+}

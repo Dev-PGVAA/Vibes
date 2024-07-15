@@ -1,0 +1,12 @@
+query GetProfile {
+	GetProfile {
+		profile {
+			name
+			email
+			avatar
+			isHaveAgeLimit
+			role
+			typeofAuth
+		}
+	}
+}

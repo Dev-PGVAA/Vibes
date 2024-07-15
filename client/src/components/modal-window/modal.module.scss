@@ -1,0 +1,6 @@
+.modal {
+	@apply fixed top-0 left-0 h-screen w-screen bg-[#000000bc] grid place-items-center;
+	&.modalClose {
+		@apply hidden;
+	}
+}

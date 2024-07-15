@@ -1,0 +1,15 @@
+.users {
+	.userRow,
+	.header {
+		@apply grid grid-cols-[0.1fr_.3fr_.8fr_.2fr];
+		@media (max-width: 480px) {
+			@apply width-[150vw] overflow-x-scroll;
+		}
+	}
+	.header {
+		@apply border-b-2 border-b-white-33;
+	}
+	.col {
+		@apply mr-[10px] truncate border-b-2 border-b-white-33 max-w-[98%];
+	}
+}

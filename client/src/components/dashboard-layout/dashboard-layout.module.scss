@@ -1,0 +1,47 @@
+.section {
+	@apply grid min-h-screen sm-max:grid-rows-[auto_6.5rem] sm:grid-cols-[288px_auto];
+	> main {
+		.content {
+			@apply p-3 overflow-auto;
+		}
+	}
+	.aside {
+		@apply h-screen w-72 flex flex-col justify-between text-sm bg-sidebar;
+		.inactive {
+			@apply opacity-40 duration-200;
+		}
+		.menu {
+			@apply py-3 pl-3 relative;
+			header > a {
+				@apply font-bold text-2xl flex items-center mt-5 mb-7 pl-2;
+			}
+			.links {
+				@apply grid grid-cols-[auto_2px];
+			}
+			.activeElementLine {
+				@apply bg-accent h-[41.67px] w-[2px] rounded-full duration-300 ease-in;
+			}
+			.line {
+				@apply h-[1px] my-5 w-[calc(100%-0.75rem)] bg-[#ffffff20];
+			}
+			.playlists {
+				> button {
+					@apply mb-3;
+				}
+				button,
+				a {
+					@apply flex items-center w-full pr-5 opacity-40 duration-200 hover:opacity-100;
+				}
+				a {
+					@apply mb-1 cursor-pointer;
+				}
+			}
+		}
+	}
+}
+.public {
+	@apply overflow-x-hidden max-h-screen relative z-10 grid grid-rows-[80px_auto_80px];
+}
+.private {
+	@apply overflow-x-hidden max-h-screen relative z-10 grid grid-rows-[80px_auto];
+}

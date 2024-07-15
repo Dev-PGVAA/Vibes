@@ -1,0 +1,5 @@
+mutation DeleteTrack($id: String!) {
+	DeleteTrack(id: $id) {
+		isDeleted
+	}
+}

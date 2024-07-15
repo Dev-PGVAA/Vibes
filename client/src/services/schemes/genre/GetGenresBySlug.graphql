@@ -1,0 +1,8 @@
+query GetGenresBySlug($slug: String!) {
+	GetGenresBySlug(slug: $slug) {
+		id
+		title
+		slug
+		description
+	}
+}

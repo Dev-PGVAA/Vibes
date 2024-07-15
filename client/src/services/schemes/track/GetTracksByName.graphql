@@ -1,0 +1,10 @@
+query GetTracksByName($name: String!) {
+	GetTracksByName(name: $name) {
+		id
+		name
+		author
+		duration
+		cover
+		audio
+	}
+}

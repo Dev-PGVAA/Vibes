@@ -1,0 +1,12 @@
+schema: 'https://localhost:4200/graphql'
+documents:
+  # - 'src/app/**/*.{ts,tsx}'
+  - 'src/services/schemes/**/*.graphql'
+extensions:
+  codegen:
+    generates:
+      ./src/__generated__/output.ts:
+        plugins:
+          - 'typescript'
+          - 'typescript-operations'
+          - 'typescript-react-apollo'

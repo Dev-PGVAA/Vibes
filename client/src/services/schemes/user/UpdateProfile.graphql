@@ -1,0 +1,5 @@
+mutation UpdateProfile($data: UpdateUserInput!) {
+	UpdateProfile(data: $data) {
+		name
+	}
+}

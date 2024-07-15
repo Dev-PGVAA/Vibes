@@ -1,0 +1,8 @@
+query GetAllGenres {
+	GetAllGenres {
+		id
+		title
+		slug
+		description
+	}
+}

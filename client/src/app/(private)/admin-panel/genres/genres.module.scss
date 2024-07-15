@@ -1,0 +1,50 @@
+.page {
+	@apply px-10;
+
+	h1 {
+		@apply text-3xl font-bold;
+	}
+	.header {
+		@apply flex items-center w-full my-7;
+		.search {
+			@apply flex items-center;
+			svg {
+				@apply translate-x-3;
+			}
+			input {
+				@apply bg-transparent outline-none rounded-full border-[1px] border-[#ffffff20] pl-10 pr-2 py-2 text-sm -translate-x-6;
+			}
+		}
+		.right {
+			@apply flex items-center gap-5 ml-auto;
+			.reload {
+				@apply hover:rotate-[30deg] disabled:hover:rotate-0 duration-300;
+			}
+			.create {
+				@apply px-5 py-1 bg-accent text-black rounded-lg;
+			}
+		}
+	}
+	.table {
+		@apply w-full;
+		header,
+		.row {
+			@apply grid grid-cols-[20%_20%_auto_90px] rounded-md px-5 py-2 mb-3;
+		}
+		header {
+			@apply bg-dark-accent text-black;
+		}
+		.row {
+			@apply bg-sidebar hover:bg-white-20 duration-200;
+			p {
+				@apply max-w-[80%] truncate;
+			}
+			.actions {
+				@apply flex gap-4 justify-center;
+			}
+			svg {
+				@apply fill-accent;
+			}
+		}
+	}
+}

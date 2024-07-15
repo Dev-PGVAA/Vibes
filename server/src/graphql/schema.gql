@@ -1,0 +1,151 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Genre {
+  id: String!
+  title: String!
+  description: String!
+  slug: String!
+}
+
+type DeleteGenre {
+  isDeleted: Boolean!
+}
+
+type Singer {
+  id: String!
+  name: String!
+  avatar: String!
+}
+
+type TakeSingers {
+  isHasMore: Boolean!
+  items: [Singer!]!
+}
+
+type BanSinger {
+  isBan: Boolean!
+}
+
+type Track {
+  id: String!
+  name: String!
+  duration: String!
+  cover: String!
+  audio: String!
+  genreId: String!
+  isHaveAgeLimit: Boolean!
+  author: String!
+  albom: String!
+}
+
+type DeleteTrack {
+  isDeleted: Boolean!
+}
+
+type User {
+  id: String!
+  avatar: String!
+  name: String!
+  email: String!
+  password: String!
+  isHaveAgeLimit: Boolean!
+  role: String!
+  typeofAuth: String!
+}
+
+type GetProfileResponse {
+  profile: User!
+}
+
+type ForgotPasswordResponse {
+  isSentEmail: Boolean!
+}
+
+type AuthReturn {
+  user: User!
+  accessToken: String!
+  refreshToken: String!
+}
+
+type Query {
+  GetProfile: GetProfileResponse!
+  TakeSingers(data: TakeSingersInput!): TakeSingers!
+  GetTracksByName(name: String!): [Track!]!
+  GetTrackById(id: String!): Track!
+  GetAllGenres: [Genre!]!
+  GetGenresBySlug(slug: String!): Genre!
+  GetGenreById(id: String!): Genre!
+}
+
+input TakeSingersInput {
+  name: String
+  genre: String
+  take: Float!
+  skip: Float!
+}
+
+type Mutation {
+  UpdateProfile(data: UpdateUserInput!): User!
+  ForgotPassword(email: String!): ForgotPasswordResponse!
+  Login(data: LoginUserInput!): AuthReturn!
+  Register(data: CreateUserInput!): AuthReturn!
+  GetNewTokens: AuthReturn!
+  Logout: Boolean!
+  BanSinger(id: String!): BanSinger!
+  CreateTrack(data: CreateTrackInput!): Track!
+  UpdateTrack(data: UpdateTrackInput!): Track!
+  DeleteTrack(id: String!): DeleteTrack!
+  CreateGenre(data: CreateGenreInput!): Genre!
+  UpdateGenre(data: UpdateGenreInput!): Genre!
+  DeleteGenre(id: String!): DeleteGenre!
+}
+
+input UpdateUserInput {
+  name: String
+  avatar: String
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input CreateTrackInput {
+  name: String!
+  duration: Float!
+  cover: String!
+  audio: String!
+  isHaveAgeLimit: Boolean!
+  genreId: String!
+  authorId: String!
+}
+
+input UpdateTrackInput {
+  id: String!
+  name: String
+  duration: Float
+  cover: String
+  audio: String
+  isHaveAgeLimit: Boolean
+  genreId: String
+  authorId: String
+}
+
+input CreateGenreInput {
+  title: String!
+  description: String!
+}
+
+input UpdateGenreInput {
+  id: String!
+  title: String
+  description: String
+}

@@ -1,0 +1,7 @@
+.bageAgeLimit {
+	@apply bg-white-20 h-4 w-4 flex justify-center items-center rounded;
+	&::before {
+		@apply text-[10px];
+		content: 'E';
+	}
+}

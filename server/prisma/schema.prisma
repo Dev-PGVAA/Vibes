@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// all files save only path
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  email     String   @unique
+  name      String
+  password  String?
+  avatar    String?  @default("https://localhost:4200/uploads/default/Default Avatar.jpeg") //change after deploy
+  birthday  DateTime @default(now())
+  role      Role     @default(USER)
+
+  @@map("user")
+}
+
+model Singer {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  name      String   @unique
+  avatar    String?
+  genre     Genre    @relation(fields: [genreId], references: [id])
+  genreId   String   @map("genre_id")
+  track     Track[]
+  albom     Albom[]
+
+  @@map("singer")
+}
+
+model Albom {
+  id             String           @id @default(uuid())
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  name           String
+  release        DateTime
+  cover          String?
+  author         Singer           @relation(fields: [authorId], references: [id])
+  authorId       String           @map("author_id")
+  track          Track[]
+  favoriteAlboms FavoriteAlboms[]
+
+  @@map("albom")
+}
+
+model Track {
+  id                String              @id @default(uuid())
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @updatedAt @map("updated_at")
+  name              String
+  duration          Int
+  cover             String
+  audio             String
+  genre             Genre               @relation(fields: [genreId], references: [id])
+  genreId           String              @map("genre_id")
+  isHaveAgeLimit    Boolean             @map("is_have_age_limit")
+  author            Singer              @relation(fields: [authorId], references: [id])
+  authorId          String              @map("author_id")
+  albom             Albom?              @relation(fields: [albomId], references: [id])
+  albomId           String?             @map("albom_id")
+  trackPlaylistLink TrackPlaylistLink[]
+
+  @@map("track")
+}
+
+model Playlist {
+  id                String              @id @default(uuid())
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @updatedAt @map("updated_at")
+  name              String
+  cover             String?
+  trackPlaylistLink TrackPlaylistLink[]
+  favoritePlaylists FavoritePlaylists[]
+
+  @@map("playlist")
+}
+
+model TrackPlaylistLink {
+  id         Int    @id @default(autoincrement())
+  trackId    String @map("track_id")
+  playlistId String @map("playlist_id")
+
+  track     Track    @relation(fields: [trackId], references: [id])
+  playlists Playlist @relation(fields: [playlistId], references: [id])
+
+  @@map("track_playlist_link")
+}
+
+model FavoriteAlboms {
+  id      String @id @default(uuid())
+  userId  String @map("user_id")
+  albomId String @map("albom_id")
+  alboms  Albom  @relation(fields: [albomId], references: [id])
+
+  @@map("favorite_albom")
+}
+
+model FavoritePlaylists {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  playlistId String   @map("playlist_id")
+  playlists  Playlist @relation(fields: [playlistId], references: [id])
+
+  @@map("favorite_playlist")
+}
+
+model Genre {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  title       String   @unique
+  description String
+  slug        String   @unique
+  Track       Track[]
+  Singer      Singer[]
+
+  @@map("genre")
+}
+
+enum Role {
+  USER
+  PREMIUM
+  ADMIN
+  SINGER
+  SUPPORT
+}

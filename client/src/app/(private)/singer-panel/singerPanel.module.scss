@@ -1,0 +1,12 @@
+.card {
+	@apply bg-player p-4 rounded-lg shadow-lg w-64 duration-200;
+	h2 {
+		@apply flex items-center gap-3 font-bold duration-200;
+	}
+	p {
+		@apply text-white-7a text-sm;
+	}
+	&:hover h2 {
+		@apply text-red-400;
+	}
+}

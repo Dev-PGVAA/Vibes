@@ -1,0 +1,20 @@
+.notFound {
+	@apply w-screen h-screen grid grid-cols-2 items-center md-max:block;
+	img {
+		@apply ml-auto mr-10 md-max:p-8 pointer-events-none selection:bg-transparent;
+	}
+	> div {
+		@apply ml-10;
+		h1 {
+			@apply text-7xl font-bold mb-3;
+			letter-spacing: -1px;
+		}
+		p {
+			@apply text-xl text-[#9ba1a5] mb-10;
+			letter-spacing: -0.2px;
+		}
+		a {
+			@apply bg-white text-black flex items-center gap-3 py-2 px-6 w-fit rounded-full;
+		}
+	}
+}

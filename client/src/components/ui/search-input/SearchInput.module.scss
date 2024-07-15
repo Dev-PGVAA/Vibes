@@ -1,0 +1,9 @@
+.search {
+	@apply flex items-center;
+	button {
+		@apply absolute ml-3;
+	}
+	input {
+		@apply bg-transparent outline-none rounded-full border-[1px] border-white-20 pl-10 pr-2 py-2 text-sm;
+	}
+}

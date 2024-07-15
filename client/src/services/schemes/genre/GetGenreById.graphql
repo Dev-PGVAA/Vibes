@@ -1,0 +1,8 @@
+query GetGenreById($id: String!) {
+	GetGenreById(id: $id) {
+		id
+		title
+		slug
+		description
+	}
+}

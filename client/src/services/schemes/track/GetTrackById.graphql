@@ -1,0 +1,9 @@
+query GetTrackById($id: String!) {
+	GetTrackById(id: $id) {
+		name
+		author
+		duration
+		cover
+		audio
+	}
+}

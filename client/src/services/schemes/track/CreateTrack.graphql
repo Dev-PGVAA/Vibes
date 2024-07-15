@@ -1,0 +1,9 @@
+mutation CreateTrack($data: CreateTrackInput!) {
+	CreateTrack(data: $data) {
+		name
+		duration
+		cover
+		audio
+		isHaveAgeLimit
+	}
+}

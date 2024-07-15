@@ -1,0 +1,48 @@
+.createMenu {
+	@apply h-full w-full bg-[#151515] p-10 rounded-lg;
+	h1 {
+		@apply font-bold text-2xl mb-5;
+	}
+	.name {
+		@apply w-full grid grid-cols-2 gap-5;
+	}
+	.details {
+		@apply grid grid-cols-[auto_400px_160px] gap-7;
+	}
+	input[type='text'] {
+		@apply w-full text-sm h-8 bg-transparent border-b-2 border-[#ffffffa7] text-[#ffffff7a] outline-none;
+	}
+	label {
+		@apply flex items-center text-[#ffffffa7] text-xs relative -top-[50px] duration-200 uppercase gap-3;
+		svg {
+			@apply p-[2px] rounded-full bg-[#908f9a];
+		}
+	}
+	.generate {
+		@apply relative w-fit text-xs bg-[#908f9a] text-black px-2 py-1 rounded-md h-5 mr-3 ml-auto -top-14;
+		line-height: 14px;
+		&::before {
+			@apply uppercase;
+			content: 'generate';
+		}
+	}
+	.tooltip {
+		@apply absolute -translate-y-10 bg-[#232323] text-[#ffffffa7] p-2 w-56 text-sm font-light rounded-lg z-10;
+		&.hide {
+			@apply p-0 h-0 opacity-0;
+			article {
+				@apply hidden;
+			}
+		}
+		span {
+			@apply text-accent font-medium underline;
+		}
+		.arrow {
+			@apply absolute inline-block -top-[10px] left-[51px] h-[18px] w-5 bg-[#232323];
+			clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+		}
+	}
+	.update {
+		@apply bg-accent text-black font-semibold px-5 py-1 rounded-lg;
+	}
+}
