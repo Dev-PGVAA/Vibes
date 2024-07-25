@@ -5,9 +5,10 @@ import {
 	RegisterDocument,
 } from '@/__generated__/output'
 import { apolloClient } from '@/api/apollo-client'
-import type { IFormData } from '@/types/auth.types'
+
 import { removeFromStorage, saveTokenStorage } from './auth.helper'
 import type { IAuthResponse } from './auth.interface'
+import type { IFormData } from './auth.types'
 
 export enum EnumTokens {
 	'ACCESS_TOKEN' = 'accessToken',

@@ -4,11 +4,13 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import Captcha from '@/components/ui/captcha/Captcha'
-import { PUBLIC_PAGES } from '@/config/page-url.config'
-import authService from '@/services/user/auth/auth.service'
 
+import { LoginDocument } from '@/__generated__/output'
+import { PUBLIC_PAGES } from '@/config/page-url.config'
+import { saveTokenStorage } from '@/services/user/auth/auth.helper'
+import type { IAuthResponse } from '@/services/user/auth/auth.interface'
 import type { IFormData } from '@/services/user/auth/auth.types'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@apollo/client'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { toast } from 'sonner'
@@ -26,20 +28,22 @@ export function LoginForm({
 
 	const [token, setToken] = useState<string | undefined>()
 
-	const { mutate, isPending } = useMutation({
-		mutationKey: ['register'],
-		mutationFn: (data: IFormData) => authService.main('login', data),
-		onSuccess() {
-			toast.success('Successfully login!')
-			reset()
-			redirectOnSuccess
-				? replace(redirectOnSuccess)
-				: replace(PUBLIC_PAGES.HOME)
-		},
-		onError(error) {
-			setErrorMsg((error as Error).message)
-		},
-	})
+	const [mutate, { loading: isPending, error, data }] =
+		useMutation<IAuthResponse>(LoginDocument, {
+			onError(error) {
+				setErrorMsg((error as Error).message)
+			},
+			onCompleted() {
+				if (!error) {
+					if (data?.Login.accessToken) saveTokenStorage(data.Login.accessToken)
+					toast.success('Successfully login!')
+					reset()
+					redirectOnSuccess
+						? replace(redirectOnSuccess)
+						: replace(PUBLIC_PAGES.HOME)
+				}
+			},
+		})
 
 	const onSubmit: SubmitHandler<IFormData> = data => {
 		if (data.password.length < 6) {
@@ -50,7 +54,7 @@ export function LoginForm({
 			setErrorMsg('Captcha is required!')
 			return
 		}
-		mutate(data)
+		mutate({ variables: { data } })
 	}
 
 	return (

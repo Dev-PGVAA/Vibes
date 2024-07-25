@@ -5,10 +5,12 @@ import { useState } from 'react'
 
 import Captcha from '@/components/ui/captcha/Captcha'
 import { PUBLIC_PAGES } from '@/config/page-url.config'
-import authService from '@/services/user/auth/auth.service'
 
+import { RegisterDocument } from '@/__generated__/output'
+import { saveTokenStorage } from '@/services/user/auth/auth.helper'
+import type { IAuthResponse } from '@/services/user/auth/auth.interface'
 import type { IFormData } from '@/services/user/auth/auth.types'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@apollo/client'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FaRegEye } from 'react-icons/fa'
 import { FaRegEyeSlash } from 'react-icons/fa6'
@@ -28,20 +30,23 @@ export function SignUpForm({
 
 	const { register, handleSubmit, reset, getValues } = useForm<IFormData>()
 
-	const { mutate, isPending } = useMutation({
-		mutationKey: ['register'],
-		mutationFn: (data: IFormData) => authService.main('register', data),
-		onSuccess() {
-			toast.success('Successfully sign up!')
-			reset()
-			redirectOnSuccess
-				? replace(redirectOnSuccess)
-				: replace(PUBLIC_PAGES.HOME)
-		},
-		onError(error) {
-			setErrorMsg((error as Error).message)
-		},
-	})
+	const [mutate, { loading: isPending, error, data }] =
+		useMutation<IAuthResponse>(RegisterDocument, {
+			onError(error) {
+				setErrorMsg((error as Error).message)
+			},
+			onCompleted() {
+				if (!error) {
+					if (data?.Register.accessToken)
+						saveTokenStorage(data.Register.accessToken)
+					toast.success('Successfully sign up!')
+					reset()
+					redirectOnSuccess
+						? replace(redirectOnSuccess)
+						: replace(PUBLIC_PAGES.HOME)
+				}
+			},
+		})
 
 	const onSubmit: SubmitHandler<IFormData> = async data => {
 		if (data.password.length < 6) {
@@ -55,7 +60,7 @@ export function SignUpForm({
 		data.name = `${data.FirstName} ${data.LastName}`
 		delete data.FirstName
 		delete data.LastName
-		mutate(data)
+		mutate({ variables: { data } })
 	}
 
 	return (

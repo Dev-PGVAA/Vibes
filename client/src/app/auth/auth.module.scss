@@ -50,9 +50,9 @@
 		.variants {
 			@apply grid grid-cols-2 gap-5 mt-16 justify-center;
 			button {
-				@apply flex items-center justify-center gap-5 border px-14 py-6 rounded-xl border-[#313131] md-max:px-7;
+				@apply flex items-center justify-center gap-5 border px-7 py-6 rounded-xl border-[#313131];
 				p {
-					@apply text-sm sm-max:hidden;
+					@apply text-sm xl-max:hidden;
 				}
 			}
 		}
@@ -88,6 +88,12 @@
 			}
 			button {
 				@apply bg-white text-black text-sm text-center py-3 h-16 rounded-lg;
+			}
+			div:last-child {
+				@apply w-full;
+				div {
+					@apply w-full;
+				}
 			}
 		}
 		.forgotPassword {

@@ -16,6 +16,7 @@ export const Captcha: FunctionComponent<CaptchaProps> = ({
 	return (
 		<div className={className}>
 			<ReCAPTCHA
+				theme='dark'
 				sitekey={process.env.RECAPTCHA_SITE_KEY || ''}
 				onChange={setToken}
 			/>

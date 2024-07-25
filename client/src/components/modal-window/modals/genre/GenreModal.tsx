@@ -1,6 +1,10 @@
+import {
+	CreateGenreDocument,
+	UpdateGenreDocument,
+} from '@/__generated__/output'
 import { Textarea } from '@/components/ui/text-area/textarea'
 import type { ICreateEditGenre } from '@/services/genre/genre.interface'
-import genreService from '@/services/genre/genre.service'
+import { getAccessToken } from '@/services/user/auth/auth.helper'
 import { Button } from '@/ui/buttons/button'
 import {
 	Card,
@@ -11,7 +15,7 @@ import {
 } from '@/ui/card/card'
 import { Input } from '@/ui/input/input'
 import { Label } from '@/ui/label/label'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@apollo/client'
 import { type Dispatch, type SetStateAction, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -26,24 +30,30 @@ export function GenreModal({
 	const { register, handleSubmit, reset } = useForm<ICreateEditGenre>()
 	const [error, setError] = useState('')
 
-	const { mutate, isPending } = useMutation({
-		mutationKey: ['create-genre'],
-		mutationFn: (data: ICreateEditGenre) =>
-			type === 'create-genre'
-				? genreService.createGenre(data)
-				: genreService.updateGenre(data),
-		onSuccess() {
-			toast.success('Successfully create genre!')
-			reset()
-			setIsOpenModal(false)
-		},
-		onError(error: Error) {
-			setError(error.message)
-		},
-	})
+	const [mutate, { loading: isPending }] = useMutation(
+		type === 'create-genre' ? CreateGenreDocument : UpdateGenreDocument,
+		{
+			context: {
+				headers: {
+					authorization: `Bearer ${getAccessToken()}`,
+				},
+			},
+			onCompleted() {
+				toast.success('Successfully create genre!')
+				setIsOpenModal(false)
+				reset()
+			},
+			onError(error: Error) {
+				setError(error.message)
+			},
+		}
+	)
 
 	const onSubmit: SubmitHandler<ICreateEditGenre> = data => {
-		mutate(data)
+		const mutationOptions = {
+			variables: { data },
+		}
+		mutate(mutationOptions)
 	}
 
 	const closeModal = () => {

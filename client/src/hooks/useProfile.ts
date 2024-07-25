@@ -1,34 +1,56 @@
-import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
-import { saveTokenStorage } from '@/services/user/auth/auth.helper'
-import authService from '@/services/user/auth/auth.service'
-import userService from '@/services/user/user.service'
+import {
+	GetNewTokensDocument,
+	GetProfileDocument,
+} from '@/__generated__/output'
+import {
+	getAccessToken,
+	saveTokenStorage,
+} from '@/services/user/auth/auth.helper'
+import type { IAuthResponse } from '@/services/user/auth/auth.interface'
+import type { IUserResponse } from '@/services/user/user.interface'
 import { transformUserToState } from '@/utils/auth/transform-user-to-state'
+import { useMutation, useQuery } from '@apollo/client'
 
 export function useProfile() {
-	const { data, isLoading } = useQuery({
-		queryKey: ['profile'],
-		queryFn: () => userService.getProfile(),
-		refetchInterval: 1000 * 60 * 30, // 30 minutes in milliseconds
-	})
+	const { data, loading: isLoading } = useQuery<IUserResponse>(
+		GetProfileDocument,
+		{
+			context: {
+				headers: {
+					authorization: `Bearer ${getAccessToken()}`,
+				},
+			},
+			pollInterval: 1000 * 60 * 30,
+		}
+	)
 
-	const { isSuccess, data: dataTokens } = useQuery({
-		queryKey: ['new tokens'],
-		queryFn: () => authService.getNewTokens(),
-		enabled: !data?.data.GetProfile,
-	})
+	const [mutate, { data: dataTokens, error }] = useMutation<IAuthResponse>(
+		GetNewTokensDocument,
+		{
+			onCompleted: () => {
+				console.log(dataTokens)
+				if (dataTokens?.GetNewTokens.accessToken)
+					saveTokenStorage(dataTokens.GetNewTokens.accessToken)
+			},
+		}
+	)
 
 	useEffect(() => {
-		if (!isSuccess) return
+		if (!data?.GetProfile) mutate()
+	}, [data?.GetProfile])
 
-		if (dataTokens.data?.GetNewTokens?.accessToken)
-			saveTokenStorage(dataTokens.data.GetNewTokens.accessToken)
-	}, [isSuccess])
+	useEffect(() => {
+		if (error) return
+
+		if (dataTokens?.GetNewTokens.accessToken)
+			saveTokenStorage(dataTokens.GetNewTokens.accessToken)
+	}, [error])
 	let profile = null
 
 	try {
-		profile = data?.data.GetProfile
+		profile = data?.GetProfile
 	} catch (error) {
 		profile === null
 	}

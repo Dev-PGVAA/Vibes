@@ -77,8 +77,8 @@ export function Genres() {
 					</main>
 				) : (
 					<main>
-						{data?.data
-							.filter(
+						{data
+							?.filter(
 								item =>
 									item.title.toLowerCase().includes(filter.toLowerCase()) ||
 									item.description.toLowerCase().includes(filter.toLowerCase())

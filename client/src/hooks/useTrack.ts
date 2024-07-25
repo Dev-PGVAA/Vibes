@@ -1,10 +1,19 @@
-import trackService from '@/services/track/track.service'
-import { useQuery } from '@tanstack/react-query'
+import { GetTracksByNameDocument } from '@/__generated__/output'
+import { getAccessToken } from '@/services/user/auth/auth.helper'
+import { useQuery } from '@apollo/client'
 
 export function useTrack() {
-	const { data, isLoading, error } = useQuery({
-		queryKey: ['track'],
-		queryFn: () => trackService.getTrackByName(''),
+	const {
+		data,
+		loading: isLoading,
+		error,
+	} = useQuery(GetTracksByNameDocument, {
+		variables: { name: '' },
+		context: {
+			headers: {
+				Authorization: `Bearer ${getAccessToken()}`,
+			},
+		},
 	})
 
 	return { data, isLoading, error }

@@ -1,11 +1,16 @@
-import genreService from '@/services/genre/genre.service'
-import { useQuery } from '@tanstack/react-query'
+import { GetAllGenresDocument } from '@/__generated__/output'
+import type { IGenreResponse } from '@/services/genre/genre.interface'
+import { useQuery } from '@apollo/client'
 
 export function useGenres() {
-	let { data, isLoading, error, refetch } = useQuery({
-		queryKey: ['genres'],
-		queryFn: () => genreService.getAllGenres(),
+	const {
+		data,
+		loading: isLoading,
+		error,
+		refetch,
+	} = useQuery<IGenreResponse>(GetAllGenresDocument, {
+		fetchPolicy: 'network-only',
 	})
 
-	return { data, isLoading, error, refetch }
+	return { data: data?.GetAllGenres, isLoading, error, refetch }
 }

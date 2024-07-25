@@ -1,9 +1,9 @@
-import type { IGenre } from '@/services/genre/genre.inreface'
-import genreService from '@/services/genre/genre.service'
-import { useMutation } from '@tanstack/react-query'
+import { DeleteGenreDocument } from '@/__generated__/output'
+import type { IGenre } from '@/services/genre/genre.interface'
+import { getAccessToken } from '@/services/user/auth/auth.helper'
+import { useMutation } from '@apollo/client'
 import type { Dispatch, SetStateAction } from 'react'
 import { MdEdit, MdOutlineClose } from 'react-icons/md'
-import { toast } from 'sonner'
 import type { TGenreModal } from './Genres'
 import styles from './genres.module.scss'
 
@@ -28,11 +28,12 @@ export function GenresItem({
 		setTimeout(() => setIsOpenModal(true), 555)
 	}
 
-	const { mutate, isPending } = useMutation({
-		mutationKey: ['create-genre'],
-		mutationFn: () => genreService.deleteGenre(item.id),
-		onSuccess() {
-			toast.success('Successfully delete genre!')
+	const [mutate, { loading: isPending }] = useMutation(DeleteGenreDocument, {
+		variables: { id: item.id },
+		context: {
+			headers: {
+				authorization: `Bearer ${getAccessToken()}`,
+			},
 		},
 	})
 

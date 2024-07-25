@@ -17,7 +17,7 @@ const SkeletonLoader: FC<SkeletonProps> = ({
 			{Array(repeat)
 				.fill(null)
 				.map((_, i) => (
-					<div className={cn(styles.skeleton, className)} />
+					<div className={cn(styles.skeleton, className)} key={i} />
 				))}
 		</>
 	)

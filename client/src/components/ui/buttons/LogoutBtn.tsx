@@ -1,19 +1,25 @@
 'use client'
 
+import { LogoutDocument } from '@/__generated__/output'
 import { PUBLIC_PAGES } from '@/config/page-url.config'
-import authService from '@/services/user/auth/auth.service'
-import { useMutation } from '@tanstack/react-query'
+import { removeFromStorage } from '@/services/user/auth/auth.helper'
+import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { LuLogOut } from 'react-icons/lu'
 
 export function LogoutBtn({ className }: { className: string }) {
 	const { push } = useRouter()
 
-	const { mutate } = useMutation({
-		mutationKey: ['logout'],
-		mutationFn: () => authService.logout(),
-		onSuccess: () => {
-			push(PUBLIC_PAGES.AUTH)
+	const [mutate, { data, error }] = useMutation(LogoutDocument, {
+		onCompleted: () => {
+			if (!error) {
+				if (data) removeFromStorage()
+
+				localStorage.clear()
+				sessionStorage.clear()
+
+				push(PUBLIC_PAGES.AUTH)
+			}
 		},
 	})
 
