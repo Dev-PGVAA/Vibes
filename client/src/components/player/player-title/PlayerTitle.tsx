@@ -13,16 +13,16 @@ export function PlayerTitle({ className }: { className?: string }) {
 		<div className={className}>
 			{isLoading ? (
 				<>
-					<p className='w-[60px] h-[60px] translate-x-4'>
+					<div className='w-[60px] h-[60px] translate-x-4'>
 						<SkeletonLoader className='w-[60px] h-[60px] rounded-md' />
-					</p>
+					</div>
 					<div className='ml-4'>
-						<p className='w-[120px] h-6 mb-1'>
+						<div className='w-[120px] h-6 mb-1'>
 							<SkeletonLoader className='w-[120px] h-4 rounded' />
-						</p>
-						<p className='w-[120px] h-4'>
+						</div>
+						<div className='w-[120px] h-4'>
 							<SkeletonLoader className='w-[120px] h-4 rounded' />
-						</p>
+						</div>
 					</div>
 				</>
 			) : (

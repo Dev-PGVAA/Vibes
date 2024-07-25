@@ -6,7 +6,8 @@ import { useState } from 'react'
 import Captcha from '@/components/ui/captcha/Captcha'
 import { PUBLIC_PAGES } from '@/config/page-url.config'
 import authService from '@/services/user/auth/auth.service'
-import type { IFormData } from '@/types/auth.types'
+
+import type { IFormData } from '@/services/user/auth/auth.types'
 import { useMutation } from '@tanstack/react-query'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
@@ -23,9 +24,7 @@ export function LoginForm({
 	const { register, handleSubmit, reset, getValues } = useForm<IFormData>()
 	const { replace } = useRouter()
 
-	const [captchaToken, setCaptchaToken] = useState<string | null>(null)
-
-	const onCaptchaChange = (token: string) => setCaptchaToken(token)
+	const [token, setToken] = useState<string | undefined>()
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['register'],
@@ -47,7 +46,7 @@ export function LoginForm({
 			setErrorMsg('Password must be at least 6 characters!')
 			return
 		}
-		if (!captchaToken) {
+		if (!token && process.env.NEXT_PUBLIC_NODE_ENV !== 'development') {
 			setErrorMsg('Captcha is required!')
 			return
 		}
@@ -95,13 +94,16 @@ export function LoginForm({
 					</i>
 					<p>Must be at least 8 characters</p>
 				</div>
+				<Captcha
+					setToken={setToken}
+					show={
+						!!Object.values(getValues()).filter(Boolean).length &&
+						process.env.NEXT_PUBLIC_NODE_ENV !== 'development'
+					}
+				/>
 				<h5 className='text-red-600 my-2 text-start text-sm max-w-[19.125rem] truncate'>
 					{errorMsg}
 				</h5>
-				<Captcha
-					onToken={onCaptchaChange}
-					show={!!Object.values(getValues()).filter(Boolean).length}
-				/>
 				<button disabled={isPending} className=' disabled:bg-[#1F57DF]'>
 					Sign in
 				</button>

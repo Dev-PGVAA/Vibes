@@ -1,8 +1,8 @@
-# 👋 Hi, I'm Artem! <br/> I'm ready to present you the product <br/> ECO-Music GQL ![Logo](https://i.ibb.co/QnQFVFd/Apple-touch-icon-57x57.png)
+# 👋 Hi, I'm Artem! <br/> I'm ready to present you the product <br/> Vibes ![Logo](https://i.ibb.co/QnQFVFd/Apple-touch-icon-57x57.png)
 
-The Vibes GQL project is a pioneering endeavor at the intersection of music and sustainability, harnessing the power of GraphQL technology to promote eco-consciousness within the music industry. This innovative platform offers a range of features aimed at reducing the environmental impact of music production, distribution, and consumption while enhancing the overall sustainability of the industry.
+The Vibes project is a pioneering endeavor at the intersection of music and sustainability, harnessing the power of GraphQL technology to promote eco-consciousness within the music industry. This innovative platform offers a range of features aimed at reducing the environmental impact of music production, distribution, and consumption while enhancing the overall sustainability of the industry.
 
-Key components of the Vibes GQL project include:
+Key components of the Vibes project include:
 
     1. Sustainable Music Discovery:
     Through GraphQL-powered search and recommendation systems,
@@ -20,7 +20,7 @@ Key components of the Vibes GQL project include:
     empowering stakeholders to identify and address environmental inefficiencies.
 
     4. Community Engagement:
-    Vibes GQL fosters a vibrant community of eco-conscious musicians,
+    Vibes  fosters a vibrant community of eco-conscious musicians,
     industry professionals, and fans, providing forums for knowledge sharing, collaboration,
     and advocacy for sustainable practices in the music industry.
 
@@ -30,7 +30,7 @@ Key components of the Vibes GQL project include:
     carbon offsetting, and renewable energy usage.
 
     6. Educational Resources:
-    Through GraphQL-powered content delivery, Vibes GQL offers educational resources
+    Through GraphQL-powered content delivery, Vibes  offers educational resources
     and best practices for adopting sustainable approaches to music production, distribution, and consumption.
 
     7. Data Analytics and Insights:
@@ -38,7 +38,7 @@ Key components of the Vibes GQL project include:
     into the environmental impact of their music-related activities,
     facilitating data-driven decision-making for greater sustainability.
 
-Overall, the Vibes GQL project represents a groundbreaking initiative to transform the music industry into a force for positive environmental change, empowering stakeholders to create, share, and enjoy music in a way that is both artistically fulfilling and ecologically responsible.
+Overall, the Vibes project represents a groundbreaking initiative to transform the music industry into a force for positive environmental change, empowering stakeholders to create, share, and enjoy music in a way that is both artistically fulfilling and ecologically responsible.
 
 ## Demo
 
@@ -55,13 +55,13 @@ Overall, the Vibes GQL project represents a groundbreaking initiative to transfo
 Clone the project
 
 ```bash
-  git clone https://github.com/Dev-PGVAA/Music-GQL.git
+  git clone https://github.com/Dev-PGVAA/vibes.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Music-GQL
+  cd vibes
 ```
 
 Config .env
@@ -115,8 +115,8 @@ then install dependencies
 Start the server
 
 ```bash
-  cd server && npm run start:dev
-  cd clent && npm run dev
+  cd server && npm run dev
+  cd client && npm run dev
 ```
 
 ## Features

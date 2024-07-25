@@ -27,7 +27,7 @@ export function CreateTrack() {
 					<label htmlFor='title'>title</label>
 				</div>
 				<div>
-					<input type='text' value={slug} id='slug' disabled />
+					<input type='text' value={slug} disabled />
 					<label htmlFor='slug'>
 						slug
 						<div

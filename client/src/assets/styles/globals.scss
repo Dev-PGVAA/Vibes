@@ -35,3 +35,6 @@ body {
 main {
 	overflow: hidden;
 }
+div:has(.grecaptcha-badge) {
+	display: none;
+}

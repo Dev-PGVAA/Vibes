@@ -16,6 +16,7 @@ const Aside = ({ isHaveAnAccount, setIsHaveAnAccount }: any) => {
 	useEffect(() => {
 		if (error) toast.error(`${error} auth error!`)
 	}, [])
+
 	return (
 		<aside>
 			<div>

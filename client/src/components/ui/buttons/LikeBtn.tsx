@@ -1,5 +1,6 @@
 import cn from 'clsx'
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
+
 import { TiHeartFullOutline } from 'react-icons/ti'
 
 export function LikeBtn({

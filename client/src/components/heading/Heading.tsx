@@ -80,9 +80,9 @@ function Heading() {
 								)}
 							</>
 						) : (
-							<p className='h-10 w-10 -translate-y-1'>
-								<SkeletonLoader className='h-10 w-10' borderRadius={9999} />
-							</p>
+							<div className='h-10 w-10 -translate-y-1'>
+								<SkeletonLoader className='h-10 w-10 rounded-full' />
+							</div>
 						)}
 					</div>
 				</div>

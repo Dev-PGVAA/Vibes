@@ -1,12 +1,13 @@
-import { FC } from 'react'
-import Skeleton, { SkeletonProps } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import cn from 'clsx'
+import type { FC } from 'react'
+import styles from './SkeletonLoader.module.scss'
 
-type CustomSkeletonProps = SkeletonProps & {
+type SkeletonProps = {
+	className?: string
 	repeat?: number
 }
 
-const SkeletonLoader: FC<CustomSkeletonProps> = ({
+const SkeletonLoader: FC<SkeletonProps> = ({
 	className,
 	repeat = 1,
 	...rest
@@ -16,13 +17,7 @@ const SkeletonLoader: FC<CustomSkeletonProps> = ({
 			{Array(repeat)
 				.fill(null)
 				.map((_, i) => (
-					<Skeleton
-						{...rest}
-						baseColor='#151619'
-						highlightColor='#1F2125'
-						className={className}
-						key={i}
-					/>
+					<div className={cn(styles.skeleton, className)} />
 				))}
 		</>
 	)

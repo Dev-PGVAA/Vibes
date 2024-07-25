@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 import { SITE_NAME } from '@/constants/seo.constants'
 
 import '@/assets/styles/globals.scss'
+import Script from 'next/script'
 import { Providers } from './providers'
 
 const arimo = DM_Sans({
@@ -33,6 +34,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<head>
 				<meta name='theme-color' content='#161616' />
+				<Script src='https://www.google.com/recaptcha/enterprise.js?render=6Lfo9RcqAAAAAKz142M13pCIa80rrt9ARnOuCoeh' />
 			</head>
 			<body className={arimo.className} id='body' data-theme='dark'>
 				<Providers>

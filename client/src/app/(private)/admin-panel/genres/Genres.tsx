@@ -3,9 +3,7 @@
 import { Title } from '@/components/heading/Title/Title'
 import { Modal } from '@/components/modal-window/Modal'
 import SkeletonLoader from '@/ui/loaders/SkeletonLoader'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { type ChangeEvent, useLayoutEffect, useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { MdSearch } from 'react-icons/md'
 import { GenresItem } from './GenresItem'
@@ -31,25 +29,6 @@ export function Genres() {
 		setTypeModal('create-genre')
 		setIsOpenModal(true)
 	}
-
-	gsap.registerPlugin(ScrollTrigger)
-	useLayoutEffect(() => {
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: '#title',
-				start: 'top top',
-				end: '+=150',
-				scrub: true,
-			},
-		})
-		tl.to('#title', {
-			position: 'fixed',
-			left: 408,
-			top: 20,
-			duration: 1,
-			ease: 'power1.inOut',
-		})
-	}, [])
 
 	return (
 		<div className={styles.page}>
@@ -92,7 +71,7 @@ export function Genres() {
 				{isLoading ? (
 					<main>
 						<SkeletonLoader
-							className='w-full rounded-md h-11 mb-3'
+							className='w-full rounded-md h-[38.65px] mb-3'
 							repeat={25}
 						/>
 					</main>
