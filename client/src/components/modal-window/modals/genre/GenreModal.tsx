@@ -1,28 +1,31 @@
-import {
-	CreateGenreDocument,
-	UpdateGenreDocument,
-} from '@/__generated__/output'
+import { useMutation } from '@apollo/client'
+import { type Dispatch, type SetStateAction, useState } from 'react'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+
 import { Textarea } from '@/components/ui/text-area/textarea'
-import type { ICreateEditGenre } from '@/services/genre/genre.interface'
-import { getAccessToken } from '@/services/user/auth/auth.helper'
+
 import { Button } from '@/ui/buttons/button'
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
-	CardTitle,
+	CardTitle
 } from '@/ui/card/card'
 import { Input } from '@/ui/input/input'
 import { Label } from '@/ui/label/label'
-import { useMutation } from '@apollo/client'
-import { type Dispatch, type SetStateAction, useState } from 'react'
-import { type SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+
+import {
+	CreateGenreDocument,
+	UpdateGenreDocument
+} from '@/__generated__/output'
+import type { ICreateEditGenre } from '@/services/genre/genre.interface'
+import { getAccessToken } from '@/services/user/auth/auth.helper'
 
 export function GenreModal({
 	type,
-	setIsOpenModal,
+	setIsOpenModal
 }: {
 	type: 'create-genre' | 'edit-genre'
 	setIsOpenModal: Dispatch<SetStateAction<boolean>>
@@ -35,8 +38,8 @@ export function GenreModal({
 		{
 			context: {
 				headers: {
-					authorization: `Bearer ${getAccessToken()}`,
-				},
+					authorization: `Bearer ${getAccessToken()}`
+				}
 			},
 			onCompleted() {
 				toast.success('Successfully create genre!')
@@ -45,13 +48,13 @@ export function GenreModal({
 			},
 			onError(error: Error) {
 				setError(error.message)
-			},
+			}
 		}
 	)
 
 	const onSubmit: SubmitHandler<ICreateEditGenre> = data => {
 		const mutationOptions = {
-			variables: { data },
+			variables: { data }
 		}
 		mutate(mutationOptions)
 	}
@@ -81,7 +84,7 @@ export function GenreModal({
 								id='name'
 								placeholder='Enter the name of genre'
 								{...register('title', {
-									required: 'Title is required!',
+									required: 'Title is required!'
 								})}
 							/>
 						</div>
@@ -91,17 +94,23 @@ export function GenreModal({
 								id='framework'
 								placeholder='Write some info about this genre'
 								{...register('description', {
-									required: 'Description is required!',
+									required: 'Description is required!'
 								})}
 							/>
 						</div>
 					</div>
 					<p className='text-sm text-red-600'>{error}</p>
 					<div className='flex justify-between mt-5'>
-						<Button variant='outline' onClick={() => closeModal()}>
+						<Button
+							variant='outline'
+							onClick={() => closeModal()}
+						>
 							Cancel
 						</Button>
-						<Button type='submit' disabled={isPending}>
+						<Button
+							type='submit'
+							disabled={isPending}
+						>
 							{type === 'create-genre' ? 'Create' : 'Edit'}
 						</Button>
 					</div>

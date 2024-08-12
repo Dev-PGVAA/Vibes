@@ -9,7 +9,6 @@ import { AuthResolver } from './auth/auth.resolver'
 import { AuthService } from './auth/auth.service'
 import { SocialController } from './auth/social/social.controller'
 import { SocialService } from './auth/social/social.service'
-import { GithubStrategy } from './auth/social/strategies/github.strategy'
 import { GoogleStrategy } from './auth/social/strategies/google.strategy'
 import { JwtStrategy } from './guards/strategies/jwt.strategy'
 import { UserResolver } from './user.resolver'
@@ -27,7 +26,6 @@ import { UserService } from './user.service'
 		JwtStrategy,
 		SocialService,
 		GoogleStrategy,
-		GithubStrategy
 	],
 	imports: [
 		ConfigModule,

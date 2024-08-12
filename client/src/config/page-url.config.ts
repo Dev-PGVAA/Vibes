@@ -8,7 +8,7 @@ class PUBLIC {
 		HOME: '/settings',
 		SECURITY: '/settings/security',
 		APPEARANCE: '/settings/appearance',
-		FEEDBACK: '/settings/feedback',
+		FEEDBACK: '/settings/feedback'
 	}
 	AUTH = '/auth'
 }
@@ -16,8 +16,7 @@ class PUBLIC {
 class ADMIN {
 	private root = '/admin-panel'
 
-	HOME = this.root
-	STATISTICS = `${this.root}/statistics`
+	HOME = `${this.root}`
 	USERS = `${this.root}/users`
 	TRACKS = `${this.root}/tracks`
 	ALBUMS = `${this.root}/albums`
@@ -37,7 +36,6 @@ class Server {
 	private root = 'https://localhost:4200/api'
 
 	GOOGLE_AUTH = `${this.root}/auth/google`
-	GITHUB_AUTH = `${this.root}/auth/github`
 }
 
 export const PUBLIC_PAGES = new PUBLIC()

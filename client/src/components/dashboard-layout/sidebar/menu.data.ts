@@ -1,57 +1,97 @@
+import { FaDatabase } from 'react-icons/fa'
+import { GoGraph, GoIssueTracks } from 'react-icons/go'
+import { IoDiscSharp, IoMusicalNotes } from 'react-icons/io5'
+import { LuListMusic } from 'react-icons/lu'
+import { MdAdminPanelSettings, MdSpatialAudioOff } from 'react-icons/md'
+import { PiUsersFill } from 'react-icons/pi'
+import { SiAirplayaudio } from 'react-icons/si'
+import { TiHome } from 'react-icons/ti'
+
 import {
 	ADMIN_PAGES,
 	PUBLIC_PAGES,
-	SINGER_PAGES,
+	SINGER_PAGES
 } from '@/config/page-url.config'
 
-import { GoGraph } from 'react-icons/go'
-import { IoDiscSharp, IoMusicalNotes } from 'react-icons/io5'
-import { LuListMusic } from 'react-icons/lu'
-import { MdSpatialAudioOff } from 'react-icons/md'
-import { SiAirplayaudio } from 'react-icons/si'
-import { TiHome } from 'react-icons/ti'
 import type { IMenuItem } from './menu.interface'
 
 export const MENU: IMenuItem[] = [
 	{
 		icon: TiHome,
 		link: PUBLIC_PAGES.HOME,
-		name: 'Home',
+		name: 'Home'
 	},
 	{
 		icon: LuListMusic,
 		link: PUBLIC_PAGES.COLLECTIONS,
-		name: 'Collections',
+		name: 'Collections'
 	},
 	{
 		icon: IoDiscSharp,
 		link: PUBLIC_PAGES.ALBUMS,
-		name: 'Albums',
+		name: 'Albums'
 	},
 	{
 		icon: IoMusicalNotes,
 		link: PUBLIC_PAGES.SONGS,
-		name: 'Songs',
+		name: 'Songs'
 	},
 	{
 		icon: MdSpatialAudioOff,
 		link: PUBLIC_PAGES.ARTIST,
-		name: 'Artist',
-	},
+		name: 'Artist'
+	}
 ]
 export const MENU_ADMIN: IMenuItem[] = [
 	{
-		icon: GoGraph,
+		icon: MdAdminPanelSettings,
 		link: ADMIN_PAGES.HOME,
 		name: 'Admin panel',
+		nested: [
+			{
+				icon: GoGraph,
+				link: ADMIN_PAGES.HOME,
+				name: 'Statistics'
+			},
+			{
+				icon: PiUsersFill,
+				link: ADMIN_PAGES.USERS,
+				name: 'Users'
+			},
+			{
+				icon: GoIssueTracks,
+				link: ADMIN_PAGES.TRACKS,
+				name: 'Tracks'
+			},
+			{
+				icon: IoDiscSharp,
+				link: ADMIN_PAGES.ALBUMS,
+				name: 'Albums'
+			},
+			{
+				icon: LuListMusic,
+				link: ADMIN_PAGES.PLAYLISTS,
+				name: 'Playlists'
+			},
+			{
+				icon: MdSpatialAudioOff,
+				link: ADMIN_PAGES.AUTHORS,
+				name: 'Authors'
+			},
+			{
+				icon: FaDatabase,
+				link: ADMIN_PAGES.GENRES,
+				name: 'Genres'
+			}
+		]
 	},
-	...MENU,
+	...MENU
 ]
 export const MENU_SINGER: IMenuItem[] = [
 	{
 		icon: SiAirplayaudio,
 		link: SINGER_PAGES.HOME,
-		name: 'Singer panel',
+		name: 'Singer panel'
 	},
-	...MENU,
+	...MENU
 ]

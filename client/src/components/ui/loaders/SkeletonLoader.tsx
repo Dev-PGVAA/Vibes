@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import type { FC } from 'react'
+
 import styles from './SkeletonLoader.module.scss'
 
 type SkeletonProps = {
@@ -17,7 +18,10 @@ const SkeletonLoader: FC<SkeletonProps> = ({
 			{Array(repeat)
 				.fill(null)
 				.map((_, i) => (
-					<div className={cn(styles.skeleton, className)} key={i} />
+					<div
+						className={cn(styles.skeleton, className)}
+						key={i}
+					/>
 				))}
 		</>
 	)

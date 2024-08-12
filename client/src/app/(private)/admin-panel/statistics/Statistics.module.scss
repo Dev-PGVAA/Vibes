@@ -1,0 +1,18 @@
+.header {
+	@apply grid;
+	.greeting {
+		@apply flex gap-20 text-4xl;
+		letter-spacing: -2px;
+	}
+	.date {
+		@apply flex gap-1 text-sm items-center opacity-60;
+	}
+}
+.topics {
+	@apply flex gap-5 overflow-x-scroll whitespace-nowrap mt-10 mb-5 pb-5;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}

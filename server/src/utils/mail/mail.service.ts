@@ -6,7 +6,7 @@ type TEmailData = {
 	subject: string
 	html: string
 }
-
+//TODO: get auth from .env
 @Injectable()
 export class MailService {
 	sendMail({ to, subject, html }: TEmailData) {

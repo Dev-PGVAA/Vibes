@@ -2,7 +2,9 @@
 
 import cn from 'clsx'
 import { useState } from 'react'
+
 import { usePlayer } from '../hooks/usePlayer'
+
 import styles from './Slider.module.scss'
 
 export function Slider({ value }: { value: number }) {

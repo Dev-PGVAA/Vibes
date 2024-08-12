@@ -5,7 +5,6 @@ import { Response } from 'express'
 import { GraphQLError } from 'graphql'
 import { Role } from 'prisma/generated/client'
 import { MailService } from 'src/utils/mail/mail.service'
-import { checkIsEmail } from 'src/utils/validator/checkIsEmail'
 import { checkIsHaveAgeLimit } from 'src/utils/validator/checkIsHaveAgeLimit'
 import { CreateUserInput } from '../dto/create-user.input'
 import { LoginUserInput } from '../dto/login-user.input'
@@ -27,8 +26,6 @@ export class AuthService {
 	}
 
 	async login(data: LoginUserInput) {
-		checkIsEmail(data.email, 'Email must be an email')
-
 		const user = await this.validateUser(data)
 		const tokens = await this.issueTokens(user.id, user.role)
 
@@ -47,8 +44,6 @@ export class AuthService {
 	}
 
 	async register(data: CreateUserInput) {
-		checkIsEmail(data.email, 'Email must be an email')
-
 		const oldUser = await this.userService.getByEmail(data.email)
 
 		if (oldUser) throw new GraphQLError('User already exists')
@@ -101,28 +96,37 @@ export class AuthService {
 	}
 
 	private async validateUser(data: LoginUserInput) {
+		// const user = await this.userService.getByEmail(data.email)
+
+		// if (!user) throw new GraphQLError('Email or password invalid')
+
+		// const isValid = await verify(user.password, data.password)
+
+		// if (!isValid) {
+		// 	this.mailService.sendMail({
+		// 		to: data.email,
+		// 		subject: 'Login failed',
+		// 		// TODO: Add more details to the email
+		// 		html: `<h1>Someone tried to login to your account</h1>`
+		// 	})
+		// 	throw new GraphQLError(`Email or password invalid`)
+		// }
+
+		// this.mailService.sendMail({
+		// 	to: data.email,
+		// 	subject: 'Login success',
+		// 	// TODO: Add more details to the email
+		// 	html: `<h1>Someone success login to your account</h1>`
+		// })
+
+		// return user
 		const user = await this.userService.getByEmail(data.email)
 
-		if (!user) throw new GraphQLError('Email or password invalid')
+		if (!user) throw new GraphQLError('User not found')
 
 		const isValid = await verify(user.password, data.password)
 
-		if (!isValid) {
-			this.mailService.sendMail({
-				to: data.email,
-				subject: 'Login failed',
-				// TODO: Add more details to the email
-				html: `<h1>Someone tried to login to your account</h1>`
-			})
-			throw new GraphQLError(`Email or password invalid`)
-		}
-
-		this.mailService.sendMail({
-			to: data.email,
-			subject: 'Login success',
-			// TODO: Add more details to the email
-			html: `<h1>Someone success login to your account</h1>`
-		})
+		if (!isValid) throw new GraphQLError('Invalid password')
 
 		return user
 	}

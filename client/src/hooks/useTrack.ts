@@ -1,19 +1,20 @@
+import { useQuery } from '@apollo/client'
+
 import { GetTracksByNameDocument } from '@/__generated__/output'
 import { getAccessToken } from '@/services/user/auth/auth.helper'
-import { useQuery } from '@apollo/client'
 
 export function useTrack() {
 	const {
 		data,
 		loading: isLoading,
-		error,
+		error
 	} = useQuery(GetTracksByNameDocument, {
 		variables: { name: '' },
 		context: {
 			headers: {
-				Authorization: `Bearer ${getAccessToken()}`,
-			},
-		},
+				Authorization: `Bearer ${getAccessToken()}`
+			}
+		}
 	})
 
 	return { data, isLoading, error }

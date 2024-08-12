@@ -1,6 +1,7 @@
 import cn from 'clsx'
+
 import { SearchItem } from './SearchItem'
-import { ISeachItem } from './search.interface'
+import type { ISeachItem } from './search.interface'
 import styles from './search.module.scss'
 
 export function SearchMenu() {
@@ -11,14 +12,17 @@ export function SearchMenu() {
 			cover: '',
 			duration: 146,
 			isHaveAgeLimit: false,
-			link: 'test',
-		},
+			link: 'test'
+		}
 	]
 
 	return (
 		<div className={cn(styles.searchMenu, 'opacity-0 delay-300')}>
 			{SearchItems.map(item => (
-				<SearchItem key={item.name} item={item} />
+				<SearchItem
+					key={item.name}
+					item={item}
+				/>
 			))}
 		</div>
 	)

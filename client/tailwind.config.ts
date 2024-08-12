@@ -17,7 +17,7 @@ const COLORS = {
 	'white-66': '#ffffff66',
 	'white-7a': '#ffffff7a',
 	'white-99': '#ffffff99',
-	transparent: 'transparent',
+	transparent: 'transparent'
 }
 
 const config: Config = {
@@ -26,16 +26,44 @@ const config: Config = {
 	content: [
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
-		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/app/**/*.{js,ts,jsx,tsx,mdx}'
 	],
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-sans)', ...fontFamily.sans],
+				sans: ['var(--font-sans)', ...fontFamily.sans]
 			},
 			colors: COLORS,
+			keyframes: {
+				hideSidebar: {
+					from: {
+						width: '18rem',
+						transform: 'translateX(0)',
+						opacity: '1'
+					},
+					to: {
+						width: '0',
+						transform: 'translateX(-100%)',
+						opacity: '0'
+					}
+				},
+				showSidebar: {
+					from: {
+						width: '0',
+						transform: 'translateX(-100%)',
+						opacity: '0'
+					},
+					to: {
+						width: '18rem',
+						transform: 'translateX(0)',
+						opacity: '1'
+					}
+				}
+			},
 			animation: {
 				rotate: 'rotate 0.7s',
+				hideSidebar: 'hideSidebar .35s forwards',
+				showSidebar: 'showSidebar .35s forwards'
 			},
 			fontSize: {
 				xs: '0.9rem',
@@ -51,11 +79,11 @@ const config: Config = {
 				'6xl': '4.44rem',
 				'7xl': '5.33rem',
 				'8xl': '7.1rem',
-				'9xl': '9.5rem',
+				'9xl': '9.5rem'
 			},
 			transitionDuration: {
-				DEFAULT: '266ms',
-			},
+				DEFAULT: '266ms'
+			}
 		},
 		screens: {
 			xs: '320px',
@@ -74,9 +102,9 @@ const config: Config = {
 			'3xl': '1600px',
 			'3xl-max': { max: '1600px' },
 			'4xl': '1850px',
-			'4xl-max': { max: '1850px' },
-		},
+			'4xl-max': { max: '1850px' }
+		}
 	},
-	plugins: [],
+	plugins: []
 }
 export default config

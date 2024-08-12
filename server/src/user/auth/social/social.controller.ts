@@ -6,7 +6,6 @@ import { SocialService } from './social.service'
 export class SocialController {
 	constructor(private readonly socialService: SocialService) {}
 
-	// Google
 	@Get('google')
 	@UseGuards(AuthGuard('google'))
 	async googleAuth() {}
@@ -19,15 +18,4 @@ export class SocialController {
 
 	@Get('google/redirect')
 	async googleAuthRedirectError(@Res() res, @Query('error') error) {}
-
-	// Github
-	@Get('github')
-	@UseGuards(AuthGuard('github'))
-	async githubAuth() {}
-
-	@Get('github/redirect')
-	@UseGuards(AuthGuard('github'))
-	async githubAuthRedirect(@Req() req, @Res() res) {
-		return this.socialService.githubLogin(req, res)
-	}
 }

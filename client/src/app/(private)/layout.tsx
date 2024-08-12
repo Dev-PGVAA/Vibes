@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 
-import PrivateDashboardLayout from '@/components/dashboard-layout/PrivateDashboardLayout'
+import DashboardLayout from '@/components/dashboard-layout/DashboardLayout'
 
 export default function Layout({ children }: PropsWithChildren<unknown>) {
-	return <PrivateDashboardLayout>{children}</PrivateDashboardLayout>
+	return <DashboardLayout isShowPlayer={false}>{children}</DashboardLayout>
 }

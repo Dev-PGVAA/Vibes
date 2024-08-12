@@ -13,12 +13,18 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  email     String   @unique
-  name      String
-  password  String?
-  avatar    String?  @default("https://localhost:4200/uploads/default/Default Avatar.jpeg") //change after deploy
-  birthday  DateTime @default(now())
-  role      Role     @default(USER)
+
+  email    String   @unique
+  name     String
+  password String?
+  avatar   String?  @default("https://localhost:4200/uploads/default/default_avatar.jpeg") //change after deploy
+  birthday DateTime @default(now())
+  role     Role     @default(USER)
+
+  transactions Transaction[]
+
+  isAutoRenewal       Boolean   @default(true)
+  subscriptionEndDate DateTime?
 
   @@map("user")
 }
@@ -27,25 +33,31 @@ model Singer {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  name      String   @unique
-  avatar    String?
-  genre     Genre    @relation(fields: [genreId], references: [id])
-  genreId   String   @map("genre_id")
-  track     Track[]
-  albom     Albom[]
+
+  name   String  @unique
+  avatar String?
+
+  genre   Genre  @relation(fields: [genreId], references: [id])
+  genreId String @map("genre_id")
+
+  tracks Track[]
+  alboms Albom[]
 
   @@map("singer")
 }
 
 model Albom {
-  id             String           @id @default(uuid())
-  createdAt      DateTime         @default(now()) @map("created_at")
-  updatedAt      DateTime         @updatedAt @map("updated_at")
-  name           String
-  release        DateTime
-  cover          String?
-  author         Singer           @relation(fields: [authorId], references: [id])
-  authorId       String           @map("author_id")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name    String
+  release DateTime
+  cover   String?
+
+  author   Singer @relation(fields: [authorId], references: [id])
+  authorId String @map("author_id")
+
   track          Track[]
   favoriteAlboms FavoriteAlboms[]
 
@@ -53,31 +65,38 @@ model Albom {
 }
 
 model Track {
-  id                String              @id @default(uuid())
-  createdAt         DateTime            @default(now()) @map("created_at")
-  updatedAt         DateTime            @updatedAt @map("updated_at")
-  name              String
-  duration          Int
-  cover             String
-  audio             String
-  genre             Genre               @relation(fields: [genreId], references: [id])
-  genreId           String              @map("genre_id")
-  isHaveAgeLimit    Boolean             @map("is_have_age_limit")
-  author            Singer              @relation(fields: [authorId], references: [id])
-  authorId          String              @map("author_id")
-  albom             Albom?              @relation(fields: [albomId], references: [id])
-  albomId           String?             @map("albom_id")
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name           String
+  duration       Int
+  cover          String
+  audio          String
+  isHaveAgeLimit Boolean @map("is_have_age_limit")
+
+  genre   Genre  @relation(fields: [genreId], references: [id])
+  genreId String @map("genre_id")
+
+  author   Singer @relation(fields: [authorId], references: [id])
+  authorId String @map("author_id")
+
+  albom   Albom?  @relation(fields: [albomId], references: [id])
+  albomId String? @map("albom_id")
+
   trackPlaylistLink TrackPlaylistLink[]
 
   @@map("track")
 }
 
 model Playlist {
-  id                String              @id @default(uuid())
-  createdAt         DateTime            @default(now()) @map("created_at")
-  updatedAt         DateTime            @updatedAt @map("updated_at")
-  name              String
-  cover             String?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name  String
+  cover String?
+
   trackPlaylistLink TrackPlaylistLink[]
   favoritePlaylists FavoritePlaylists[]
 
@@ -105,8 +124,9 @@ model FavoriteAlboms {
 }
 
 model FavoritePlaylists {
-  id         String   @id @default(uuid())
-  userId     String   @map("user_id")
+  id     String @id @default(uuid())
+  userId String @map("user_id")
+
   playlistId String   @map("playlist_id")
   playlists  Playlist @relation(fields: [playlistId], references: [id])
 
@@ -114,16 +134,37 @@ model FavoritePlaylists {
 }
 
 model Genre {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  title       String   @unique
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title       String @unique
   description String
-  slug        String   @unique
-  Track       Track[]
-  Singer      Singer[]
+  slug        String @unique
+
+  Track  Track[]
+  Singer Singer[]
 
   @@map("genre")
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  paymentId     String  @unique @map("payment_id")
+  paymentMethod String? @map("payment_method")
+
+  months Int
+  amount String
+
+  status TransactionStatus
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+
+  @@map("transaction")
 }
 
 enum Role {
@@ -132,4 +173,12 @@ enum Role {
   ADMIN
   SINGER
   SUPPORT
+}
+
+enum TransactionStatus {
+  pending
+  waiting_for_capture
+  succeeded
+  canceled
+  refunded
 }

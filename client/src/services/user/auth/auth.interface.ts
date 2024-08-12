@@ -21,8 +21,10 @@ export interface IAuthResponse {
 
 export enum UserRole {
 	User = 'USER',
-	Admin = 'ADMIN',
+	Premium = 'PREMIUM',
 	Singer = 'SINGER',
+	Support = 'SUPPORT',
+	Admin = 'ADMIN'
 }
 
 export interface ITokenInside {

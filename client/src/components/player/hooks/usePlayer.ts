@@ -120,19 +120,19 @@ export function usePlayer() {
 				revert,
 				rewind,
 				playNext,
-				playPrev,
+				playPrev
 			},
 			audio: {
 				isPlaying,
 				isRepeat,
 				currentTime,
 				duration,
-				progress,
+				progress
 			},
 			player: {
 				isShuffle,
-				playId,
-			},
+				playId
+			}
 		}),
 		[
 			isPlaying,
@@ -145,7 +145,7 @@ export function usePlayer() {
 			toggleRepeat,
 			toggleShuffle,
 			forward,
-			revert,
+			revert
 		]
 	)
 }

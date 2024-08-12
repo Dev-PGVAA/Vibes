@@ -1,52 +1,68 @@
 import { Field, InputType } from '@nestjs/graphql'
+import { IsBoolean, IsNumber, IsString } from 'class-validator'
 
 @InputType()
 export class CreateTrackInput {
 	@Field()
+	@IsString()
 	name: string
 
 	@Field()
+	@IsNumber()
 	duration: number
 
 	@Field()
+	@IsString()
 	cover: string
 
 	@Field()
+	@IsString()
 	audio: string
 
 	@Field()
+	@IsBoolean()
 	isHaveAgeLimit: boolean
 
 	@Field()
+	@IsString()
 	genreId: string
 
 	@Field()
+	@IsString()
 	authorId: string
 }
 
 @InputType()
 export class UpdateTrackInput {
 	@Field()
+	@IsString()
 	id: string
 
 	@Field({ nullable: true })
-	name: string
+	@IsString()
+	name?: string
 
 	@Field({ nullable: true })
-	duration: number
+	@IsNumber()
+	duration?: number
 
 	@Field({ nullable: true })
-	cover: string
+	@IsString()
+	cover?: string
 
 	@Field({ nullable: true })
-	audio: string
+	@IsString()
+	audio?: string
 
 	@Field({ nullable: true })
-	isHaveAgeLimit: boolean
+	@IsBoolean()
+	isHaveAgeLimit?: boolean
 
 	@Field({ nullable: true })
-	genreId: string
+	@IsString()
+	genreId?: string
 
 	@Field({ nullable: true })
-	authorId: string
+	@IsString()
+	authorId?: string
 }

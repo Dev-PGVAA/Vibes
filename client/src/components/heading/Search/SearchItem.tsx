@@ -1,14 +1,20 @@
-import type { ITrack } from '@/services/track/track.interface'
-import { BadgeAgeLimit } from '@/ui/badges/badgeAgeLimit/BadgeAgeLimit'
-import { formatTime } from '@/utils/time/formatTime'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { BadgeAgeLimit } from '@/ui/badges/badgeAgeLimit/BadgeAgeLimit'
+
+import { formatTime } from '@/utils/time/formatTime'
+
 import type { ISeachItem } from './search.interface'
 import styles from './search.module.scss'
+import type { ITrack } from '@/services/track/track.interface'
 
 export function SearchItem({ item }: { item: ITrack | ISeachItem }) {
 	return (
-		<Link href='#' className={styles.searchItem}>
+		<Link
+			href='#'
+			className={styles.searchItem}
+		>
 			<Image
 				src={item.cover}
 				alt={item.name}

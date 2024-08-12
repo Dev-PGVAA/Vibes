@@ -73,8 +73,7 @@ export class UserService {
 	async forgotPassword(email: string) {
 		const user = await this.getByEmail(email)
 
-		if (!user)
-			throw new GraphQLError('User with this email does not exist!', null)
+		if (!user) throw new GraphQLError('User with this email does not exist!', null)
 
 		const code = +crypto
 			.getRandomValues(new Uint32Array(1))[0]

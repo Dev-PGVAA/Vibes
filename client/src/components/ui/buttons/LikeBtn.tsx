@@ -1,11 +1,10 @@
 import cn from 'clsx'
 import type { Dispatch, SetStateAction } from 'react'
-
 import { TiHeartFullOutline } from 'react-icons/ti'
 
 export function LikeBtn({
 	isLike,
-	setIsLike,
+	setIsLike
 }: {
 	isLike: boolean
 	setIsLike?: Dispatch<SetStateAction<boolean | undefined>>

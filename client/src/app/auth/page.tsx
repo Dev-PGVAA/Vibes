@@ -7,7 +7,7 @@ import { Auth } from './auth'
 export const metadata: Metadata = {
 	title: 'Auth',
 	description: 'Auth page',
-	...NO_INDEX_PAGE,
+	...NO_INDEX_PAGE
 }
 
 export default function AuthPage() {

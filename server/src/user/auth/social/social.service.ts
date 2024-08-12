@@ -44,28 +44,4 @@ export class SocialService {
 
 		res.redirect(`${process.env.CLIENT_URL}/home`)
 	}
-
-	async githubLogin(data: GithubUser, res: Response) {
-		if (!data) throw new Error('No user from github')
-
-		const oldUser = await this.userService.getByEmail(data.user.username)
-
-		if (!oldUser) {
-			await this.prisma.user.create({
-				data: {
-					email: data.user.username,
-					name: data.user.displayName,
-					avatar: data.user.photos[0].value,
-					birthday: new Date(Date.now())
-				}
-			})
-		}
-
-		const user = await this.getEmailSocialAuth(data.user.username)
-
-		const tokens = await this.authService.issueTokens(user.id, user.role)
-		this.authService.addRefreshTokenToResponse(res, tokens.refreshToken)
-
-		res.redirect(`${process.env.CLIENT_URL}/home`)
-	}
 }

@@ -1,9 +1,12 @@
 'use client'
 
-import { useTrack } from '@/hooks/useTrack'
 import cn from 'clsx'
 import { type FC, useState } from 'react'
+
+import { useTrack } from '@/hooks/useTrack'
+
 import { LikeBtn } from '../ui/buttons/LikeBtn'
+
 import { PlayerButtons } from './player-buttons/PlayerButtons'
 import { PlayerSlider } from './player-slider/PlayerSlider'
 import { PlayerTitle } from './player-title/PlayerTitle'

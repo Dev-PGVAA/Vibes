@@ -1,11 +1,15 @@
-import { Slider } from '@/components/player/slider/Slider'
-import { useTrack } from '@/hooks/useTrack'
-import { formatTime } from '@/utils/time/formatTime'
 import cn from 'clsx'
 import { FaBackward } from 'react-icons/fa'
 import { IoPlay } from 'react-icons/io5'
 import { MdOutlinePause, MdOutlineRepeat } from 'react-icons/md'
 import { PiShuffleSimpleLight } from 'react-icons/pi'
+
+import { Slider } from '@/components/player/slider/Slider'
+
+import { useTrack } from '@/hooks/useTrack'
+
+import { formatTime } from '@/utils/time/formatTime'
+
 import { usePlayer } from '../hooks/usePlayer'
 import styles from '../player.module.scss'
 
@@ -42,7 +46,10 @@ export function PlayerSlider({ className }: { className?: string }) {
 						)}
 					</button>
 					<button onClick={() => actions.playNext()}>
-						<FaBackward className={styles.playNextButton} size={18} />
+						<FaBackward
+							className={styles.playNextButton}
+							size={18}
+						/>
 					</button>
 					<button onClick={() => actions.toggleRepeat()}>
 						<MdOutlineRepeat

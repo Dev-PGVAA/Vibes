@@ -3,12 +3,13 @@
 import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
-import type { ITokenInside } from '@/services/user/auth/auth.interface'
-import authService, { EnumTokens } from '@/services/user/auth/auth.service'
 import {
 	type TUserDataState,
-	transformUserToState,
+	transformUserToState
 } from '../auth/transform-user-to-state'
+
+import type { ITokenInside } from '@/services/user/auth/auth.interface'
+import authService, { EnumTokens } from '@/services/user/auth/auth.service'
 
 export async function getServerAuth(): Promise<TUserDataState | null> {
 	const JWT_SECRET = process.env.JWT_SECRET

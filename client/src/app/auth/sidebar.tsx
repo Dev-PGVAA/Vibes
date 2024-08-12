@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
-
 import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+
 import { LoginForm } from './loginForm/loginForm'
 import { SignUpForm } from './signUpForm/signUpForm'
 import { SocialAuth } from './social-auth/SocialAuth'
@@ -9,9 +9,9 @@ import { SocialAuth } from './social-auth/SocialAuth'
 // TODO: forgot password + correct email to btn, sign in with ...
 const Aside = ({ isHaveAnAccount, setIsHaveAnAccount }: any) => {
 	const searchParams = useSearchParams()
-
 	const redirectOnSuccess = searchParams.get('redirect')
 	const error = searchParams.get('error')
+	const [date, setDate] = useState<Date>()
 
 	useEffect(() => {
 		if (error) toast.error(`${error} auth error!`)

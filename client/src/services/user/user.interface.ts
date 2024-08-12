@@ -1,4 +1,4 @@
-import { IUser } from '@/types/auth.types'
+import type { IUser } from './auth/auth.types'
 
 export interface IUserResponse {
 	GetProfile: {

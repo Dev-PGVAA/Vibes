@@ -5,7 +5,7 @@ import { Toaster } from 'sonner'
 import { SITE_NAME } from '@/constants/seo.constants'
 
 import '@/assets/styles/globals.scss'
-import Script from 'next/script'
+
 import { Providers } from './providers'
 
 const arimo = DM_Sans({
@@ -13,33 +13,42 @@ const arimo = DM_Sans({
 	weight: ['300', '400', '700'],
 	display: 'swap',
 	variable: '--font-DM_Sans',
-	style: ['normal'],
+	style: ['normal']
 })
 
 export const metadata: Metadata = {
 	title: {
 		default: SITE_NAME,
-		template: `%s | ${SITE_NAME}`,
+		template: `%s | ${SITE_NAME}`
 	},
 	icons: '/favicon.svg',
-	manifest: '/manifest.json',
+	manifest: '/manifest.json'
 }
 
 export default function RootLayout({
-	children,
+	children
 }: Readonly<{
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en'>
+		<html
+			lang='en'
+			suppressHydrationWarning={true}
+		>
 			<head>
-				<meta name='theme-color' content='#161616' />
-				<Script src='https://www.google.com/recaptcha/enterprise.js?render=6Lfo9RcqAAAAAKz142M13pCIa80rrt9ARnOuCoeh' />
+				<meta
+					name='theme-color'
+					content='#161616'
+				/>
 			</head>
-			<body className={arimo.className} id='body' data-theme='dark'>
+			<body className={arimo.className}>
 				<Providers>
 					{children}
-					<Toaster theme='light' position='top-right' duration={4500} />
+					<Toaster
+						theme='light'
+						position='top-right'
+						duration={4500}
+					/>
 				</Providers>
 			</body>
 		</html>

@@ -1,6 +1,6 @@
 import {
 	type TProtectUserData,
-	UserRole,
+	UserRole
 } from '@/services/user/auth/auth.interface'
 
 export type TUserDataState = {
@@ -16,6 +16,6 @@ export const transformUserToState = (
 	return {
 		...user,
 		isAdmin: user.role === UserRole.Admin,
-		isLoggedIn: true,
+		isLoggedIn: true
 	}
 }

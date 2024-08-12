@@ -1,17 +1,18 @@
+import { useMutation, useQuery } from '@apollo/client'
 import { useEffect } from 'react'
+
+import { transformUserToState } from '@/utils/auth/transform-user-to-state'
 
 import {
 	GetNewTokensDocument,
-	GetProfileDocument,
+	GetProfileDocument
 } from '@/__generated__/output'
 import {
 	getAccessToken,
-	saveTokenStorage,
+	saveTokenStorage
 } from '@/services/user/auth/auth.helper'
 import type { IAuthResponse } from '@/services/user/auth/auth.interface'
 import type { IUserResponse } from '@/services/user/user.interface'
-import { transformUserToState } from '@/utils/auth/transform-user-to-state'
-import { useMutation, useQuery } from '@apollo/client'
 
 export function useProfile() {
 	const { data, loading: isLoading } = useQuery<IUserResponse>(
@@ -19,10 +20,10 @@ export function useProfile() {
 		{
 			context: {
 				headers: {
-					authorization: `Bearer ${getAccessToken()}`,
-				},
+					authorization: `Bearer ${getAccessToken()}`
+				}
 			},
-			pollInterval: 1000 * 60 * 30,
+			pollInterval: 1000 * 60 * 30
 		}
 	)
 
@@ -30,23 +31,23 @@ export function useProfile() {
 		GetNewTokensDocument,
 		{
 			onCompleted: () => {
-				console.log(dataTokens)
 				if (dataTokens?.GetNewTokens.accessToken)
 					saveTokenStorage(dataTokens.GetNewTokens.accessToken)
-			},
+			}
 		}
 	)
 
 	useEffect(() => {
 		if (!data?.GetProfile) mutate()
-	}, [data?.GetProfile])
+	}, [data?.GetProfile, dataTokens?.GetNewTokens])
 
 	useEffect(() => {
 		if (error) return
 
 		if (dataTokens?.GetNewTokens.accessToken)
 			saveTokenStorage(dataTokens.GetNewTokens.accessToken)
-	}, [error])
+	}, [!error])
+
 	let profile = null
 
 	try {
@@ -61,7 +62,7 @@ export function useProfile() {
 		isLoading,
 		user: {
 			...profile,
-			...userState,
-		},
+			...userState
+		}
 	}
 }

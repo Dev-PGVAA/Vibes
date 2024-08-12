@@ -1,12 +1,16 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { loadErrorMessages } from '@apollo/client/dev'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core'
 
-loadErrorMessages()
+// import { InMemoryCache } from '@apollo/experimental-nextjs-app-support'
+
 export const apolloClient = new ApolloClient({
-	uri: process.env.GRAPHQL_SERVER_URL,
-	cache: new InMemoryCache(),
-	credentials: 'include',
-	headers: {
-		'Content-Type': 'application/json',
-	},
+	connectToDevTools: process.env.NODE_ENV === 'development',
+	ssrMode: typeof window === 'undefined',
+	link: new HttpLink({
+		uri: process.env.GRAPHQL_SERVER_URL,
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}),
+	cache: new InMemoryCache()
 })

@@ -9,15 +9,14 @@ export interface CaptchaProps {
 export const Captcha: FunctionComponent<CaptchaProps> = ({
 	show,
 	setToken,
-	className,
+	className
 }) => {
 	if (!show) return null
 
 	return (
 		<div className={className}>
 			<ReCAPTCHA
-				theme='dark'
-				sitekey={process.env.RECAPTCHA_SITE_KEY || ''}
+				sitekey={process.env.RECAPTCHA_SITE_KEY as string}
 				onChange={setToken}
 			/>
 		</div>

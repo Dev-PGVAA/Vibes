@@ -1,7 +1,10 @@
-import { useTrack } from '@/hooks/useTrack'
+import Image from 'next/image'
+
 import { BadgeAgeLimit } from '@/ui/badges/badgeAgeLimit/BadgeAgeLimit'
 import SkeletonLoader from '@/ui/loaders/SkeletonLoader'
-import Image from 'next/image'
+
+import { useTrack } from '@/hooks/useTrack'
+
 import { usePlayer } from '../hooks/usePlayer'
 import styles from '../player.module.scss'
 

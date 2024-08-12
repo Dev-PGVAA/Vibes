@@ -1,0 +1,28 @@
+.item {
+	@apply grid grid-cols-[70%_30%] bg-player p-5 rounded-xl min-w-[400px] h-28 items-center;
+	user-select: none;
+	.info {
+		@apply grid grid-cols-[40px_auto] gap-5;
+		> div {
+			@apply w-44;
+			p {
+				@apply truncate;
+			}
+		}
+	}
+	.statistics {
+		@apply grid grid-rows-3 items-center justify-center;
+		svg {
+			@apply mx-auto;
+		}
+		p {
+			@apply flex justify-center;
+		}
+		.value {
+			@apply text-sm mt-1;
+		}
+		.period {
+			@apply text-xs opacity-40;
+		}
+	}
+}

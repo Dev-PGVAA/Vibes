@@ -1,25 +1,25 @@
-import {
-	GetNewTokensDocument,
-	LoginDocument,
-	LogoutDocument,
-	RegisterDocument,
-} from '@/__generated__/output'
 import { apolloClient } from '@/api/apollo-client'
 
 import { removeFromStorage, saveTokenStorage } from './auth.helper'
 import type { IAuthResponse } from './auth.interface'
 import type { IFormData } from './auth.types'
+import {
+	GetNewTokensDocument,
+	LoginDocument,
+	LogoutDocument,
+	RegisterDocument
+} from '@/__generated__/output'
 
 export enum EnumTokens {
 	'ACCESS_TOKEN' = 'accessToken',
-	'REFRESH_TOKEN' = 'refreshToken',
+	'REFRESH_TOKEN' = 'refreshToken'
 }
 
 class AuthService {
 	async main(type: 'login' | 'register', data: IFormData) {
 		const response = await apolloClient.mutate<IAuthResponse>({
 			mutation: type === 'login' ? LoginDocument : RegisterDocument,
-			variables: { data },
+			variables: { data }
 		})
 
 		if (type === 'login' && response.data?.Login.accessToken)
@@ -33,7 +33,7 @@ class AuthService {
 
 	async getNewTokens() {
 		const response = await apolloClient.mutate<IAuthResponse>({
-			mutation: GetNewTokensDocument,
+			mutation: GetNewTokensDocument
 		})
 
 		if (response.data?.GetNewTokens.accessToken)
@@ -47,9 +47,9 @@ class AuthService {
 			mutation: GetNewTokensDocument,
 			context: {
 				headers: {
-					Cookie: `refreshToken=${refreshToken}`,
-				},
-			},
+					Cookie: `refreshToken=${refreshToken}`
+				}
+			}
 		})
 
 		return response.data
@@ -57,7 +57,7 @@ class AuthService {
 
 	async logout() {
 		const response = await apolloClient.mutate<boolean>({
-			mutation: LogoutDocument,
+			mutation: LogoutDocument
 		})
 
 		if (response.data) removeFromStorage()

@@ -25,7 +25,7 @@ body {
 	scrollbar-width: thin;
 	scrollbar-color: #e2fb6c #121212;
 	&::selection {
-		@apply bg-[#E2FB6C] text-[#121212];
+		@apply bg-[#E2FB6C];
 	}
 	&:disabled {
 		@apply opacity-50;

@@ -1,11 +1,12 @@
-import { DeleteGenreDocument } from '@/__generated__/output'
-import type { IGenre } from '@/services/genre/genre.interface'
-import { getAccessToken } from '@/services/user/auth/auth.helper'
 import { useMutation } from '@apollo/client'
 import type { Dispatch, SetStateAction } from 'react'
 import { MdEdit, MdOutlineClose } from 'react-icons/md'
+
 import type { TGenreModal } from './Genres'
 import styles from './genres.module.scss'
+import { DeleteGenreDocument } from '@/__generated__/output'
+import type { IGenre } from '@/services/genre/genre.interface'
+import { getAccessToken } from '@/services/user/auth/auth.helper'
 
 type TGenreEditDefaultValue = {
 	id: string
@@ -21,7 +22,7 @@ interface IGenresItem {
 export function GenresItem({
 	item,
 	setTypeModal,
-	setIsOpenModal,
+	setIsOpenModal
 }: IGenresItem) {
 	const openEditModal = () => {
 		setTypeModal('edit-genre')
@@ -32,9 +33,9 @@ export function GenresItem({
 		variables: { id: item.id },
 		context: {
 			headers: {
-				authorization: `Bearer ${getAccessToken()}`,
-			},
-		},
+				authorization: `Bearer ${getAccessToken()}`
+			}
+		}
 	})
 
 	const deleteGenre = () => {
@@ -51,7 +52,10 @@ export function GenresItem({
 					<button onClick={() => openEditModal()}>
 						<MdEdit />
 					</button>
-					<button disabled={isPending} onClick={() => deleteGenre()}>
+					<button
+						disabled={isPending}
+						onClick={() => deleteGenre()}
+					>
 						<MdOutlineClose />
 					</button>
 				</p>

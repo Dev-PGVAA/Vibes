@@ -1,7 +1,8 @@
 'use client'
 
-import cn from 'clsx'
+import { AnimatePresence, m } from 'framer-motion'
 import { type Dispatch, type SetStateAction, useEffect } from 'react'
+
 import styles from './modal.module.scss'
 import { GenreModal } from './modals/genre/GenreModal'
 
@@ -26,10 +27,22 @@ export function Modal({ type, isOpenModal, setIsOpenModal }: IModal) {
 	}, [])
 
 	return (
-		<div className={cn(styles.modal, !isOpenModal && styles.modalClose)}>
-			{(type === 'create-genre' || 'edit-genre') && (
-				<GenreModal type={type} setIsOpenModal={setIsOpenModal} />
+		<AnimatePresence>
+			{isOpenModal && (
+				<m.div
+					className={styles.modal}
+					exit={{ opacity: 0, height: 0, backgroundColor: '#00000000' }}
+					initial={{ opacity: 0, y: 50 }}
+					animate={{ opacity: 1, y: 0, backgroundColor: '#000000bc' }}
+				>
+					{(type === 'create-genre' || 'edit-genre') && (
+						<GenreModal
+							type={type}
+							setIsOpenModal={setIsOpenModal}
+						/>
+					)}
+				</m.div>
 			)}
-		</div>
+		</AnimatePresence>
 	)
 }

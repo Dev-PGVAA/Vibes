@@ -1,11 +1,14 @@
 'use client'
 
-import { Title } from '@/components/heading/Title/Title'
-import { Modal } from '@/components/modal-window/Modal'
-import SkeletonLoader from '@/ui/loaders/SkeletonLoader'
 import { type ChangeEvent, useState } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { MdSearch } from 'react-icons/md'
+
+import { Title } from '@/components/heading/Title/Title'
+import { Modal } from '@/components/modal-window/Modal'
+
+import SkeletonLoader from '@/ui/loaders/SkeletonLoader'
+
 import { GenresItem } from './GenresItem'
 import styles from './genres.module.scss'
 import { useGenres } from './hooks/useGenres'
@@ -22,7 +25,7 @@ export function Genres() {
 	const [defaultValue, setDefaultValue] = useState({
 		id: '',
 		title: '',
-		description: '',
+		description: ''
 	})
 
 	const openCreateModal = () => {
@@ -50,7 +53,10 @@ export function Genres() {
 						disabled={isLoading}
 						onClick={() => refetch()}
 					>
-						<IoReload size={24} strokeWidth={5} />
+						<IoReload
+							size={24}
+							strokeWidth={5}
+						/>
 					</button>
 					<button
 						className={styles.create}
@@ -72,7 +78,7 @@ export function Genres() {
 					<main>
 						<SkeletonLoader
 							className='w-full rounded-md h-[38.65px] mb-3'
-							repeat={25}
+							repeat={5}
 						/>
 					</main>
 				) : (

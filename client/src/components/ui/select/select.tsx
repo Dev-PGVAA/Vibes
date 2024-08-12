@@ -4,12 +4,11 @@ import {
 	CaretSortIcon,
 	CheckIcon,
 	ChevronDownIcon,
-	ChevronUpIcon,
+	ChevronUpIcon
 } from '@radix-ui/react-icons'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import * as React from 'react'
-
 import cn from 'clsx'
+import * as React from 'react'
 
 const Select = SelectPrimitive.Root
 
@@ -160,5 +159,5 @@ export {
 	SelectScrollUpButton,
 	SelectSeparator,
 	SelectTrigger,
-	SelectValue,
+	SelectValue
 }

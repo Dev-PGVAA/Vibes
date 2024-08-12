@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { AdminPanel } from './AdminPanel'
+
+import { Statistics } from './statistics/Statistics'
 
 export const metadata: Metadata = {
-	title: 'Admin SSR',
+	title: 'Admin SSR'
 }
 
 export default async function AdminPage() {
-	return <AdminPanel />
+	return <Statistics />
 }
