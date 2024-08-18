@@ -10,28 +10,32 @@ export class StatisticsService {
 	constructor(private readonly prisma: PrismaService) {}
 
 	async getCountriesRating() {
-		const countries = await this.prisma.user.groupBy({
-			by: ['country'],
-			_count: {
-				id: true
-			},
+		const countriesId = await this.prisma.user.groupBy({
+			by: ['countryId'],
+			_count: { id: true },
 			where: {
-				country: {
-					not: null
-				}
+				countryId: { not: null }
 			},
 			orderBy: {
-				_count: {
-					id: 'desc'
-				}
+				_count: { id: 'desc' }
 			}
 		})
+
+		const countries = await this.prisma.$transaction(
+			countriesId.map(id => 
+				this.prisma.country.findUnique({
+					where: {
+						id: id.countryId
+					},
+				})
+			)
+		)
 
 		const countiesCount = await this.prisma.$transaction(
 			countries.map(country => 
 				this.prisma.user.count({
 					where: {
-						country: country.country
+						countryId: country.id
 					}
 				})
 			)
@@ -39,8 +43,9 @@ export class StatisticsService {
 
 		return countries.map((country, index) => {
 			return {
-				...country,
-				count: countiesCount[index]
+				country: country.name,
+				count: countiesCount[index],
+				icon: country.icon
 			}
 		})
 	}
@@ -65,8 +70,20 @@ export class StatisticsService {
 	}
 
 	async getUsers(data: PaginationArgsWithSearchTerm) {
+		const countriesId = await this.prisma.country.findMany({
+			where: {
+				name: {
+					contains: data?.searchTerm,
+					mode: 'insensitive',
+				}
+			},
+			select: { id: true }
+		})
+
+		const countriesIdFormatted = countriesId.map(country => `${country.id}`).join(' || ') || undefined
+
 		const searchTermQuery = data?.searchTerm
-			? this.getSearchTermFilter(data?.searchTerm)
+			? this.getSearchTermFilter(data?.searchTerm, countriesIdFormatted)
 			: {}
 
 		const users = await this.prisma.user.findMany({
@@ -75,13 +92,24 @@ export class StatisticsService {
 			where: searchTermQuery,
 		})
 
+		const usersFormatted = users.map(user => {
+			return {
+				...user,
+				country: this.prisma.country.findUnique({
+					where: {
+						id: user.countryId
+					},
+				}).then(country => country.name)
+			}
+		})
+
 		const totalCount = await this.prisma.user.count({
 			where: searchTermQuery,
 		})
 
 		const isHasMore = isHasMorePagination(totalCount, data?.skip, data.take)
 
-		return { items: users, isHasMore }
+		return { items: usersFormatted, isHasMore }
 	}
 
 	async getUserStatistics(){
@@ -196,7 +224,7 @@ export class StatisticsService {
 		return months 
 	}
 
-	private getSearchTermFilter(searchTerm: string): Prisma.UserWhereInput {
+	private getSearchTermFilter(searchTerm: string, countriesId): Prisma.UserWhereInput {
 		return {
 			OR: [
 				{
@@ -212,11 +240,11 @@ export class StatisticsService {
 					},
 				},
 				{
-					country: {
-						contains: searchTerm,
+					countryId: {
+						contains: countriesId,
 						mode: 'insensitive',
-					},
-				},
+					}
+				}
 			],
 		}
 	}

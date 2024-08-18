@@ -1,0 +1,14 @@
+query GetUserStatistics {
+	GetUserStatistics {
+		registrations {
+			month
+			year
+			count
+		}
+		activeUsers {
+			month
+			year
+			count
+		}
+	}
+}

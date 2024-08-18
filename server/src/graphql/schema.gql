@@ -47,6 +47,7 @@ type ForgotPasswordResponse {
 type StatisticsCountryRatings {
   country: String!
   count: Float!
+  icon: String!
 }
 
 type StatisticsSexRatings {

@@ -19,9 +19,7 @@ export class UserService {
 
 	async getById(id: string) {
 		return this.prisma.user.findUnique({
-			where: {
-				id
-			}
+			where: {id}
 		})
 	}
 
@@ -35,22 +33,15 @@ export class UserService {
 		return {
 			profile: {
 				...user,
+				country: this.prisma.country.findUnique({
+					where: {
+						id: user.countryId
+					},
+				}).then(country => country.name),
 				isHaveAgeLimit,
 				typeofAuth
 			}
 		}
-	}
-
-	async getUsers() {
-		return this.prisma.user.findMany({
-			select: {
-				name: true,
-				email: true,
-				role: true,
-				id: true,
-				password: false
-			}
-		})
 	}
 
 	async getByEmail(email: string) {
@@ -100,7 +91,7 @@ export class UserService {
 				...data,
 				email: data.email.toLowerCase().trim(),
 				password: await hash(data.password),
-				birthday: new Date(Date.now())
+				birthday: new Date(Date.now()),
 			}
 		})
 	}

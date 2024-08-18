@@ -1,0 +1,12 @@
+query GetUsers($data: PaginationArgsWithSearchTerm!) {
+	GetUsers(data: $data) {
+		items {
+			name
+			email
+			avatar
+			country
+			sex
+		}
+		isHasMore
+	}
+}

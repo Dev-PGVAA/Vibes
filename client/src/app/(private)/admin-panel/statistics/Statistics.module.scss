@@ -1,7 +1,7 @@
 .header {
-	@apply grid;
+	@apply grid selection:text-black;
 	.greeting {
-		@apply flex gap-20 text-4xl;
+		@apply flex gap-20 text-4xl font-bold;
 		letter-spacing: -2px;
 	}
 	.date {

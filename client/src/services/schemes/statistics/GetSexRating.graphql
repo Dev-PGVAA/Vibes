@@ -1,0 +1,6 @@
+query GetSexRating {
+	GetSexRating {
+		sex
+		count
+	}
+}

@@ -1,10 +1,11 @@
 .item {
-	@apply grid grid-cols-[70%_30%] bg-player p-5 rounded-xl min-w-[400px] h-28 items-center;
+	@apply grid grid-cols-[70%_30%] bg-player p-5 rounded-xl h-28 items-center;
 	user-select: none;
+	width: clamp(400px, 45vw, 800px);
 	.info {
 		@apply grid grid-cols-[40px_auto] gap-5;
 		> div {
-			@apply w-44;
+			width: clamp(146px, 8.8vw, 600px);
 			p {
 				@apply truncate;
 			}

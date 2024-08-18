@@ -19,8 +19,10 @@ model User {
   avatar   String?  @default("https://localhost:4200/uploads/default/default_avatar.jpeg") //change after deploy
   birthday DateTime @default(now())
   role     Role     @default(USER)
-  country  String?
   sex      Sex      @default(NOT_SPECIFICATED)
+
+  country   Country? @relation(fields: [countryId], references: [id])
+  countryId String?  @map("country_id")
 
   transactions Transaction[]
 
@@ -166,6 +168,17 @@ model Transaction {
   userId String @map("user_id")
 
   @@map("transaction")
+}
+
+model Country {
+  id String @id @default(uuid())
+
+  name String
+  icon String
+
+  User User[]
+
+  @@map("country")
 }
 
 enum Role {

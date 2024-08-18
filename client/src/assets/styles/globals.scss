@@ -24,6 +24,7 @@ body {
 	line-height: 120%;
 	scrollbar-width: thin;
 	scrollbar-color: #e2fb6c #121212;
+	font-variant-numeric: tabular-nums;
 	&::selection {
 		@apply bg-[#E2FB6C];
 	}

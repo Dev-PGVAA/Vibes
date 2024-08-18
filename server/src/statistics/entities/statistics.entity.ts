@@ -7,7 +7,10 @@ export class StatisticsCountryRatings {
 	country: string
 
 	@Field()
-	count: number
+	count: number	
+	
+	@Field()
+	icon: string
 }
 
 @ObjectType()
