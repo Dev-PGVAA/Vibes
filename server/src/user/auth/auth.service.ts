@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { Role } from '@prisma/client'
 import { verify } from 'argon2'
 import { Response } from 'express'
 import { GraphQLError } from 'graphql'
-import { Role } from 'prisma/generated/client'
 import { MailService } from 'src/utils/mail/mail.service'
 import { checkIsHaveAgeLimit } from 'src/utils/validator/checkIsHaveAgeLimit'
 import { CreateUserInput } from '../dto/create-user.input'
@@ -85,7 +85,7 @@ export class AuthService {
 		const data = { id: userId, role }
 
 		const accessToken = this.jwt.sign(data, {
-			expiresIn: '1h'
+			expiresIn: '1h',
 		})
 
 		const refreshToken = this.jwt.sign(data, {
@@ -140,7 +140,7 @@ export class AuthService {
 			domain: process.env.DOMAIN,
 			expires: expiresIn,
 			secure: true,
-			sameSite: 'lax'
+			sameSite: 'strict'
 		})
 	}
 
@@ -150,7 +150,7 @@ export class AuthService {
 			domain: process.env.DOMAIN,
 			expires: new Date(0),
 			secure: true,
-			sameSite: 'lax'
+			sameSite: 'strict'
 		})
 	}
 }

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common'
 
 import { YookassaService } from 'src/lib/yookassa/yookassa.service'
 
-import { User } from 'prisma/generated/client'
+import { User } from '@prisma/client'
 import { PrismaService } from 'src/prisma.service'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { MakePaymentDto } from './dto/make-payment.dto'

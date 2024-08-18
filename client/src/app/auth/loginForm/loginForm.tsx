@@ -30,23 +30,6 @@ export function LoginForm({
 
 	const [token, setToken] = useState<string | undefined>()
 
-	// const [mutate, { loading: isPending, error, data }] =
-	// 	useMutation<IAuthResponse>(LoginDocument, {
-	// 		onError(error) {
-	// 			setErrorMsg((error as Error).message)
-	// 		},
-	// 		onCompleted() {
-	// 			if (!error) {
-	// 				if (data?.Login.accessToken) saveTokenStorage(data.Login.accessToken)
-	// 				toast.success('Successfully login!')
-	// 				reset()
-	// 				redirectOnSuccess
-	// 					? replace(redirectOnSuccess)
-	// 					: replace(PUBLIC_PAGES.HOME)
-	// 			}
-	// 		}
-	// 	})
-
 	const [mutate, { loading: isPending, error, data }] =
 		useMutation<IAuthResponse>(LoginDocument, {
 			onError(error) {

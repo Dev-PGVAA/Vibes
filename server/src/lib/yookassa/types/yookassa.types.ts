@@ -1,6 +1,6 @@
 
 
-import { TransactionStatus } from 'prisma/generated/client'
+import { TransactionStatus } from '@prisma/client'
 import { AmountPayment } from '../dto/yookassa.dto'
 import { IReceipt } from './receipt.types'
 

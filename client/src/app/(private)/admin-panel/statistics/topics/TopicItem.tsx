@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { HiMiniArrowTrendingDown } from 'react-icons/hi2'
+import { HiMiniArrowTrendingDown, HiMiniArrowTrendingUp } from 'react-icons/hi2'
 
 import SkeletonLoader from '@/components/ui/loaders/SkeletonLoader'
 
@@ -44,12 +44,18 @@ export function TopicItem({
 					</>
 				) : (
 					<>
-						<HiMiniArrowTrendingDown
-							size={25}
-							// @ts-ignore
-							style={item.isPositive && { transform: 'scaleY(-1)' }}
-							fill={item.isPositive ? '#1CDB2C' : '#C3191A'}
-						/>
+						{item.isPositive ? (
+							<HiMiniArrowTrendingUp
+								size={25}
+								fill='#1CDB2C'
+							/>
+						) : (
+							<HiMiniArrowTrendingDown
+								size={25}
+								fill='#C3191A'
+							/>
+						)}
+
 						<p
 							className={cn(
 								styles.value,

@@ -19,7 +19,7 @@ export const useToggleSidebar = () => {
 				if (e.key === '[') toggleSidebar()
 			})
 		}
-	}, [isOpenSidebar])
+	}, [isOpenSidebar, toggleSidebar])
 
-	return { isOpenSidebar }
+	return { isOpenSidebar, toggleSidebar }
 }

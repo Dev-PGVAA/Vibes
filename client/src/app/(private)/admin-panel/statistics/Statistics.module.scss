@@ -16,3 +16,10 @@
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
+.statistics {
+	@apply grid grid-cols-[65%_35%] gap-10 h-96 w-full;
+
+	.chart {
+		@apply bg-player p-5 rounded-xl;
+	}
+}

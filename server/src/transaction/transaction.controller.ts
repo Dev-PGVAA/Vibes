@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common'
 
 
-import { User } from 'prisma/generated/client'
+import { User } from '@prisma/client'
 import { Auth } from 'src/user/decorators/auth.decorator'
 import { CurrentUser } from 'src/user/decorators/user.decorator'
 import { MakePaymentDto } from './dto/make-payment.dto'

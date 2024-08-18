@@ -19,13 +19,61 @@ type Singer {
   avatar: String!
 }
 
-type TakeSingers {
-  isHasMore: Boolean!
-  items: [Singer!]!
-}
-
 type BanSinger {
   isBan: Boolean!
+}
+
+type User {
+  id: String!
+  avatar: String!
+  name: String!
+  email: String!
+  password: String!
+  isHaveAgeLimit: Boolean!
+  country: String!
+  sex: String!
+  role: String!
+  typeofAuth: String!
+}
+
+type GetProfileResponse {
+  profile: User!
+}
+
+type ForgotPasswordResponse {
+  isSentEmail: Boolean!
+}
+
+type StatisticsCountryRatings {
+  country: String!
+  count: Float!
+}
+
+type StatisticsSexRatings {
+  sex: String!
+  count: Float!
+}
+
+type UsersRes {
+  items: [User!]!
+  isHasMore: Boolean!
+}
+
+type ActiveUsers {
+  month: String!
+  year: Float!
+  count: Float!
+}
+
+type RegisteredUsers {
+  month: String!
+  year: Float!
+  count: Float!
+}
+
+type UserStatistics {
+  registrations: [RegisteredUsers!]!
+  activeUsers: [ActiveUsers!]!
 }
 
 type Track {
@@ -44,25 +92,6 @@ type DeleteTrack {
   isDeleted: Boolean!
 }
 
-type User {
-  id: String!
-  avatar: String!
-  name: String!
-  email: String!
-  password: String!
-  isHaveAgeLimit: Boolean!
-  role: String!
-  typeofAuth: String!
-}
-
-type GetProfileResponse {
-  profile: User!
-}
-
-type ForgotPasswordResponse {
-  isSentEmail: Boolean!
-}
-
 type AuthReturn {
   user: User!
   accessToken: String!
@@ -71,19 +100,21 @@ type AuthReturn {
 
 type Query {
   GetProfile: GetProfileResponse!
-  TakeSingers(data: TakeSingersInput!): TakeSingers!
   GetTracksByName(name: String!): [Track!]!
   GetTrackById(id: String!): Track!
   GetAllGenres: [Genre!]!
   GetGenresBySlug(slug: String!): Genre!
   GetGenreById(id: String!): Genre!
+  GetCountriesRating: [StatisticsCountryRatings!]!
+  GetSexRating: [StatisticsSexRatings!]!
+  GetUsers(data: PaginationArgsWithSearchTerm!): UsersRes!
+  GetUserStatistics: UserStatistics!
 }
 
-input TakeSingersInput {
-  name: String
-  genre: String
-  take: Float!
+input PaginationArgsWithSearchTerm {
   skip: Float!
+  take: Float!
+  searchTerm: String
 }
 
 type Mutation {

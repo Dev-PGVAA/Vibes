@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "generated/client"
 }
 
 datasource db {
@@ -20,6 +19,8 @@ model User {
   avatar   String?  @default("https://localhost:4200/uploads/default/default_avatar.jpeg") //change after deploy
   birthday DateTime @default(now())
   role     Role     @default(USER)
+  country  String?
+  sex      Sex      @default(NOT_SPECIFICATED)
 
   transactions Transaction[]
 
@@ -181,4 +182,11 @@ enum TransactionStatus {
   succeeded
   canceled
   refunded
+}
+
+enum Sex {
+  NOT_SPECIFICATED
+  MALE
+  FEMALE
+  OUTHER
 }

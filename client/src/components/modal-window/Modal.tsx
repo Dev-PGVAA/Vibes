@@ -5,15 +5,22 @@ import { type Dispatch, type SetStateAction, useEffect } from 'react'
 
 import styles from './modal.module.scss'
 import { GenreModal } from './modals/genre/GenreModal'
+import type { IGenre } from '@/services/genre/genre.interface'
 
 type TModal = 'create-genre' | 'edit-genre'
 interface IModal {
 	type: TModal
 	isOpenModal: boolean
 	setIsOpenModal: Dispatch<SetStateAction<boolean>>
+	setDefaultData?: Dispatch<SetStateAction<IGenre[] | undefined>>
 }
 
-export function Modal({ type, isOpenModal, setIsOpenModal }: IModal) {
+export function Modal({
+	type,
+	isOpenModal,
+	setIsOpenModal,
+	setDefaultData
+}: IModal) {
 	useEffect(() => {
 		document.addEventListener('keydown', (e: KeyboardEvent) => {
 			if (e.key === 'Escape') setIsOpenModal(false)
@@ -39,6 +46,7 @@ export function Modal({ type, isOpenModal, setIsOpenModal }: IModal) {
 						<GenreModal
 							type={type}
 							setIsOpenModal={setIsOpenModal}
+							setDefaultData={setDefaultData}
 						/>
 					)}
 				</m.div>

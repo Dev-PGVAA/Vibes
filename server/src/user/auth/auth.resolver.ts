@@ -1,6 +1,7 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
 import { GraphQLError } from 'graphql'
-import { GqlContext } from 'src/app.interface'
+
+import { GqlContext } from 'src/types/app.interface'
 import { CreateUserInput } from '../dto/create-user.input'
 import { LoginUserInput } from '../dto/login-user.input'
 import { AuthService } from './auth.service'

@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { Sex } from '@prisma/client'
 
 @ObjectType()
 export class User {
@@ -19,6 +20,12 @@ export class User {
 
 	@Field()
 	isHaveAgeLimit: boolean
+
+	@Field()
+	country: string
+
+	@Field()
+	sex: Sex
 
 	@Field()
 	role: string

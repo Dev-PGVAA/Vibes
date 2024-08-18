@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import { m } from 'framer-motion'
 import type { Dispatch, SetStateAction } from 'react'
 import { MdEdit, MdOutlineClose } from 'react-icons/md'
 
@@ -16,13 +17,17 @@ type TGenreEditDefaultValue = {
 
 interface IGenresItem {
 	item: IGenre
+	index: number
 	setTypeModal: Dispatch<SetStateAction<TGenreModal>>
 	setIsOpenModal: Dispatch<SetStateAction<boolean>>
+	setDefaultData: Dispatch<SetStateAction<IGenre[] | undefined>>
 }
 export function GenresItem({
 	item,
+	index,
 	setTypeModal,
-	setIsOpenModal
+	setIsOpenModal,
+	setDefaultData
 }: IGenresItem) {
 	const openEditModal = () => {
 		setTypeModal('edit-genre')
@@ -40,26 +45,31 @@ export function GenresItem({
 
 	const deleteGenre = () => {
 		mutate()
+		setDefaultData(prev => prev?.filter(genre => genre.id !== item.id))
 	}
 
 	return (
-		<>
-			<div className={styles.row}>
-				<p>{item.title}</p>
-				<p>{item.slug}</p>
-				<p>{item.description}</p>
-				<p className={styles.actions}>
-					<button onClick={() => openEditModal()}>
-						<MdEdit />
-					</button>
-					<button
-						disabled={isPending}
-						onClick={() => deleteGenre()}
-					>
-						<MdOutlineClose />
-					</button>
-				</p>
-			</div>
-		</>
+		<m.div
+			className={styles.row}
+			animate={{ x: 0 }}
+			exit={{ x: '120%' }}
+			initial={{ x: '-80%' }}
+			transition={{ ease: 'anticipate', delay: index * 0.025 }}
+		>
+			<p>{item.title}</p>
+			<p>{item.slug}</p>
+			<p>{item.description}</p>
+			<p className={styles.actions}>
+				<button onClick={() => openEditModal()}>
+					<MdEdit />
+				</button>
+				<button
+					disabled={isPending}
+					onClick={() => deleteGenre()}
+				>
+					<MdOutlineClose />
+				</button>
+			</p>
+		</m.div>
 	)
 }

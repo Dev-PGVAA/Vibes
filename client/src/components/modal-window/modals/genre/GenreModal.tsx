@@ -20,20 +20,26 @@ import {
 	CreateGenreDocument,
 	UpdateGenreDocument
 } from '@/__generated__/output'
-import type { ICreateEditGenre } from '@/services/genre/genre.interface'
+import type {
+	ICreateEditGenre,
+	IGenre,
+	IGenreResponse
+} from '@/services/genre/genre.interface'
 import { getAccessToken } from '@/services/user/auth/auth.helper'
 
 export function GenreModal({
 	type,
-	setIsOpenModal
+	setIsOpenModal,
+	setDefaultData
 }: {
 	type: 'create-genre' | 'edit-genre'
 	setIsOpenModal: Dispatch<SetStateAction<boolean>>
+	setDefaultData: Dispatch<SetStateAction<IGenre[] | undefined>> | undefined
 }) {
 	const { register, handleSubmit, reset } = useForm<ICreateEditGenre>()
 	const [error, setError] = useState('')
 
-	const [mutate, { loading: isPending }] = useMutation(
+	const [mutate, { data, loading: isPending }] = useMutation<IGenreResponse>(
 		type === 'create-genre' ? CreateGenreDocument : UpdateGenreDocument,
 		{
 			context: {
@@ -43,6 +49,9 @@ export function GenreModal({
 			},
 			onCompleted() {
 				toast.success('Successfully create genre!')
+				console.log(data)
+				// if (type === 'create-genre' && setDefaultData)
+				// 	setDefaultData(prev => [...prev!, data!.CreateGenre])
 				setIsOpenModal(false)
 				reset()
 			},

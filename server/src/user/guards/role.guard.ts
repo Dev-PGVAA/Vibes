@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { GqlExecutionContext } from '@nestjs/graphql'
-import { Role, User } from 'prisma/generated/client'
+import { Role, User } from '@prisma/client'
 
 export class OnlyAdminGuard implements CanActivate {
 	constructor(private reflector: Reflector) {}

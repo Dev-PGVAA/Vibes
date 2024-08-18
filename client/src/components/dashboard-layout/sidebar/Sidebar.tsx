@@ -4,6 +4,14 @@ import cn from 'clsx'
 import Link from 'next/link'
 import { memo } from 'react'
 import { PiListPlusBold } from 'react-icons/pi'
+import { TbLayoutSidebarLeftCollapseFilled } from 'react-icons/tb'
+
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger
+} from '@/components/ui/tooltip/tooltip'
 
 import { PUBLIC_PAGES } from '@/config/page-url.config'
 
@@ -13,11 +21,11 @@ import styles from '../dashboard-layout.module.scss'
 import { useToggleSidebar } from '../hooks/useToggleSidebar'
 
 import { MenuItem } from './MenuItem'
-import { MENU } from './menu.data'
+import { MENU_ADMIN } from './menu.data'
 
 function Sidebar() {
 	const { user } = useProfile()
-	const { isOpenSidebar } = useToggleSidebar()
+	const { isOpenSidebar, toggleSidebar } = useToggleSidebar()
 
 	return (
 		<aside
@@ -35,9 +43,26 @@ function Sidebar() {
 								alt='logo'
 							/>
 						</Link>
+						<div>
+							<TooltipProvider delayDuration={500}>
+								<Tooltip>
+									<TooltipTrigger onClick={() => toggleSidebar()}>
+										<TbLayoutSidebarLeftCollapseFilled size={25} />
+									</TooltipTrigger>
+									<TooltipContent
+										side='left'
+										sideOffset={5}
+										className='bg-player'
+										arrowClassName='fill-player'
+									>
+										<p>Collapse sidebar</p>
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
+						</div>
 					</header>
 					<div>
-						{MENU.map(item => (
+						{MENU_ADMIN.map(item => (
 							<MenuItem
 								item={item}
 								key={item.link}
@@ -52,7 +77,6 @@ function Sidebar() {
 							<PiListPlusBold className='flex ml-auto' />
 						</button>
 						<a>Favorite music</a>
-						<a>User playlists .... </a>
 					</div>
 				</div>
 			</div>

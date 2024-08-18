@@ -1,6 +1,7 @@
 'use client'
 
-import { type ChangeEvent, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { type ChangeEvent, useEffect, useState } from 'react'
 import { IoReload } from 'react-icons/io5'
 import { MdSearch } from 'react-icons/md'
 
@@ -22,11 +23,11 @@ export function Genres() {
 	const [filter, setFilter] = useState('')
 	const [isOpenModal, setIsOpenModal] = useState(false)
 	const [typeModal, setTypeModal] = useState<TGenreModal>('create-genre')
-	const [defaultValue, setDefaultValue] = useState({
-		id: '',
-		title: '',
-		description: ''
-	})
+	const [defaultData, setDefaultData] = useState(data)
+
+	useEffect(() => {
+		setDefaultData(data)
+	}, [data])
 
 	const openCreateModal = () => {
 		setTypeModal('create-genre')
@@ -74,36 +75,41 @@ export function Genres() {
 					<p>Description</p>
 					<p>Actions</p>
 				</header>
-				{isLoading ? (
-					<main>
+				<main>
+					{isLoading ? (
 						<SkeletonLoader
 							className='w-full rounded-md h-[38.65px] mb-3'
 							repeat={5}
 						/>
-					</main>
-				) : (
-					<main>
-						{data
-							?.filter(
-								item =>
-									item.title.toLowerCase().includes(filter.toLowerCase()) ||
-									item.description.toLowerCase().includes(filter.toLowerCase())
-							)
-							.map(item => (
-								<GenresItem
-									item={item}
-									setTypeModal={setTypeModal}
-									setIsOpenModal={setIsOpenModal}
-									key={item.id}
-								/>
-							))}
-					</main>
-				)}
+					) : (
+						<AnimatePresence>
+							{defaultData
+								?.filter(
+									item =>
+										item.title.toLowerCase().includes(filter.toLowerCase()) ||
+										item.description
+											.toLowerCase()
+											.includes(filter.toLowerCase())
+								)
+								.map((item, _) => (
+									<GenresItem
+										item={item}
+										index={_}
+										setTypeModal={setTypeModal}
+										setIsOpenModal={setIsOpenModal}
+										setDefaultData={setDefaultData}
+										key={item.id}
+									/>
+								))}
+						</AnimatePresence>
+					)}
+				</main>
 			</div>
 			<Modal
 				type={typeModal}
 				isOpenModal={isOpenModal}
 				setIsOpenModal={setIsOpenModal}
+				setDefaultData={setDefaultData}
 			/>
 		</div>
 	)

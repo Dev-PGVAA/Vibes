@@ -2,9 +2,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
-import { FilesModule } from './files/files.module'
 import { GenreModule } from './genre/genre.module'
+import { MediaModule } from './media/media.module'
 import { SingerModule } from './singer/singer.module'
+import { StatisticsModule } from './statistics/statistics.module'
 import { TrackModule } from './track/track.module'
 import { UserModule } from './user/user.module'
 import { MailModule } from './utils/mail/mail.module'
@@ -19,10 +20,11 @@ import { MailModule } from './utils/mail/mail.module'
 			context: ({ req, res }) => ({ req, res })
 		}),
 		UserModule,
-		FilesModule,
+		MediaModule,
 		SingerModule,
 		TrackModule,
 		GenreModule,
+		StatisticsModule,
 		MailModule
 	]
 })

@@ -1,13 +1,14 @@
 'use client'
 
-import cn from 'clsx'
+import dynamic from 'next/dynamic'
 import { type ReactNode } from 'react'
 
 import Heading from '../heading/Heading'
-import Player from '../player/Player'
 
 import styles from './dashboard-layout.module.scss'
 import Sidebar from './sidebar/Sidebar'
+
+const DynamicPlayer = dynamic(() => import('../player/Player'), { ssr: false })
 
 export default function DashboardLayout({
 	children,
@@ -17,14 +18,14 @@ export default function DashboardLayout({
 	isShowPlayer?: boolean
 }) {
 	return (
-		<section className={styles.section}>
+		<main className={styles.main}>
 			<Sidebar />
 
-			<main className={cn(isShowPlayer ? styles.public : styles.private)}>
+			<div className={isShowPlayer ? styles.public : styles.private}>
 				<Heading />
 				<div className={styles.content}>{children}</div>
-				{isShowPlayer && <Player />}
-			</main>
-		</section>
+				{isShowPlayer && <DynamicPlayer />}
+			</div>
+		</main>
 	)
 }

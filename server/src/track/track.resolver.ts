@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { Role } from 'prisma/generated/client'
+import { Role } from '@prisma/client'
 import { GqlAuth } from 'src/user/decorators/auth.decorator'
 import { CreateTrackInput, UpdateTrackInput } from './dto/actions-track.input'
 import { DeleteTrack, Track } from './entities/track.entity'
