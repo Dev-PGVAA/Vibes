@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { Prisma, Sex } from '@prisma/client'
 import { isHasMorePagination } from 'src/base/pagination/is-has-more'
 import { PrismaService } from 'src/prisma.service'
@@ -141,11 +141,9 @@ export class StatisticsService {
 			const key = `${year}-${month}`
 
 			if (activeUsersMap.has(key)) {
-				Logger.debug(`if ${activeUsersMap.get(key) + act._count}`)
 				activeUsersMap.set(key, activeUsersMap.get(key) + act._count)
 			}
 			else {
-				Logger.debug(`else ${act._count}`)
 				activeUsersMap.set(key, act._count)
 			}
 		}
