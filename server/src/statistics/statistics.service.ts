@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { Prisma, Sex } from '@prisma/client'
 import { isHasMorePagination } from 'src/base/pagination/is-has-more'
 import { PrismaService } from 'src/prisma.service'
@@ -140,10 +140,14 @@ export class StatisticsService {
 			const year = act.updatedAt.getFullYear() 
 			const key = `${year}-${month}`
 
-			if (registrationMap.has(key)) 
+			if (activeUsersMap.has(key)) {
+				Logger.debug(`if ${activeUsersMap.get(key) + act._count}`)
 				activeUsersMap.set(key, activeUsersMap.get(key) + act._count)
-			else 
+			}
+			else {
+				Logger.debug(`else ${act._count}`)
 				activeUsersMap.set(key, act._count)
+			}
 		}
 
 		allMonths.pop()
