@@ -1,18 +1,17 @@
 import cn from 'clsx'
-import * as React from 'react'
+import { forwardRef } from 'react'
+
+import styles from './input.module.scss'
 
 export interface InputProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
 	({ className, type, ...props }, ref) => {
 		return (
 			<input
 				type={type}
-				className={cn(
-					'flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 border-zinc-800 placeholder:text-zinc-400 focus-visible:ring-zinc-300',
-					className
-				)}
+				className={cn(styles.input, className)}
 				ref={ref}
 				{...props}
 			/>

@@ -78,7 +78,7 @@ export function Genres() {
 				<main>
 					{isLoading ? (
 						<SkeletonLoader
-							className='w-full rounded-md h-[38.65px] mb-3'
+							className={styles.loader}
 							repeat={5}
 						/>
 					) : (

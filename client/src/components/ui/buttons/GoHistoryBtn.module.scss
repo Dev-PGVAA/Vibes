@@ -1,0 +1,6 @@
+.historyButton {
+	@apply p-[10px] rounded-full hover:bg-white-33 duration-200 bg-white-20;
+	.actionForward {
+		@apply rotate-180;
+	}
+}

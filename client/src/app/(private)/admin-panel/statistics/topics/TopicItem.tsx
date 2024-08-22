@@ -38,9 +38,9 @@ export function TopicItem({
 			<div className={styles.statistics}>
 				{isLoading ? (
 					<>
-						<SkeletonLoader className='w-7 h-7 rounded-lg mx-auto' />
-						<SkeletonLoader className='w-20 h-5 rounded-lg mx-auto' />
-						<SkeletonLoader className='w-16 h-3 rounded-lg mx-auto' />
+						<SkeletonLoader className={styles.loader1} />
+						<SkeletonLoader className={styles.loader2} />
+						<SkeletonLoader className={styles.loader3} />
 					</>
 				) : (
 					<>
@@ -59,7 +59,7 @@ export function TopicItem({
 						<p
 							className={cn(
 								styles.value,
-								item.isPositive ? 'text-[#1CDB2C]' : 'text-[#C3191A]'
+								item.isPositive ? styles.positive : styles.negative
 							)}
 						>
 							{item.name === 'Payment' ? currency : value}

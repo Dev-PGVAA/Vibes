@@ -106,9 +106,7 @@ export function LoginForm({
 					setToken={setToken}
 					show={!!Object.values(getValues()).filter(Boolean).length}
 				/>
-				<h5 className='text-red-600 my-2 text-start text-sm w-full truncate'>
-					{errorMsg}
-				</h5>
+				<h5 className={styles.error}>{errorMsg}</h5>
 				<button
 					disabled={isPending}
 					className={styles.submit}

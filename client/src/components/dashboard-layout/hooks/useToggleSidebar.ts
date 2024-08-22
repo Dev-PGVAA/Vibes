@@ -1,9 +1,11 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
+
+import { SidebarContext } from '@/app/providers'
 
 export const useToggleSidebar = () => {
-	const [isOpenSidebar, setIsOpenSidebar] = useState(true)
+	const { isOpenSidebar, setIsOpenSidebar } = useContext(SidebarContext)
 
 	const toggleSidebar = useCallback(() => {
 		setIsOpenSidebar(!isOpenSidebar)
@@ -11,11 +13,13 @@ export const useToggleSidebar = () => {
 
 	useEffect(() => {
 		document.addEventListener('keyup', e => {
+			e.preventDefault()
 			if (e.key === '[') toggleSidebar()
 		})
 
 		return () => {
 			document.removeEventListener('keyup', e => {
+				e.preventDefault()
 				if (e.key === '[') toggleSidebar()
 			})
 		}

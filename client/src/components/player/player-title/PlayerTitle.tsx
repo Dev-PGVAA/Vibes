@@ -16,16 +16,10 @@ export function PlayerTitle({ className }: { className?: string }) {
 		<div className={className}>
 			{isLoading ? (
 				<>
-					<div className='w-[60px] h-[60px] translate-x-4'>
-						<SkeletonLoader className='w-[60px] h-[60px] rounded-md' />
-					</div>
-					<div className='ml-4'>
-						<div className='w-[120px] h-6 mb-1'>
-							<SkeletonLoader className='w-[120px] h-4 rounded' />
-						</div>
-						<div className='w-[120px] h-4'>
-							<SkeletonLoader className='w-[120px] h-4 rounded' />
-						</div>
+					<SkeletonLoader className={styles.loader1} />
+					<div>
+						<SkeletonLoader className={styles.loader2} />
+						<SkeletonLoader className={styles.loader3} />
 					</div>
 				</>
 			) : (
@@ -34,7 +28,6 @@ export function PlayerTitle({ className }: { className?: string }) {
 						src={data?.GetTracksByName[player.playId].cover ?? ''}
 						height={60}
 						width={60}
-						className='rounded-md'
 						draggable={false}
 						unoptimized
 						alt={''}

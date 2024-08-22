@@ -65,6 +65,9 @@
 			input {
 				@apply relative bg-[#1a1a1a] text-[#a7a7a7] px-9 py-3 h-16 rounded-lg w-full mt-3 outline-none;
 			}
+			.error {
+				@apply text-red-600 my-2 text-start text-sm w-full truncate;
+			}
 			h5:empty {
 				@apply hidden;
 			}

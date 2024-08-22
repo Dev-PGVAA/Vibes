@@ -12,9 +12,11 @@ import styles from '../dashboard-layout.module.scss'
 import type { IMenuItem } from './menu.interface'
 
 export function MenuItem({
-	item
+	item,
+	index
 }: {
 	item: IMenuItem
+	index?: number
 	role: string | undefined
 }) {
 	const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -28,64 +30,67 @@ export function MenuItem({
 				<div>
 					<div
 						className={cn(
-							pathname.includes(item.link) ? 'text-white' : styles.inactive,
-							'flex items-center'
+							pathname.includes(item.link)
+								? styles.activeNested
+								: styles.inactive,
+							styles.nested
 						)}
 					>
 						<Link
 							href={item.link}
-							className='flex items-center py-2 pr-layout pl-2 transition-colors cursor-pointer gap-5 mt-2'
+							className={styles.link}
 						>
 							<item.icon size={22} />
-							<span className='font-light -translate-x-1 text-sm'>
-								{item.name}
-							</span>
+							<span>{item.name}</span>
 						</Link>
 						<m.button
 							onClick={() => setIsOpenMenu(!isOpenMenu)}
-							className='absolute right-5 translate-y-1'
+							className={styles.nestedCollapseButton}
 							whileTap={{ scale: 0.87, opacity: 0.6 }}
 						>
 							<CgChevronDown
 								size={22}
-								className={cn('duration-200', isOpenMenu && 'rotate-180')}
+								className={cn(isOpenMenu && styles.activeNestedButton)}
 							/>
 						</m.button>
 					</div>
 					<AnimatePresence>
 						{isOpenMenu && (
-							<m.div
-								className='pl-6 duration-150'
-								exit={{ opacity: 0, y: -25 }}
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-							>
-								{item.nested.map(item => (
+							<div className={styles.nestedMenu}>
+								{item.nested.map((item, _) => (
 									<MenuItem
 										key={item.link}
 										item={item}
+										index={_ + 1}
 										role={user ? user.role : 'USER'}
 									/>
 								))}
-							</m.div>
+							</div>
 						)}
 					</AnimatePresence>
 				</div>
 			) : (
-				<div>
+				<m.div
+					animate={index ? { x: 0, y: 0, opacity: 1 } : {}}
+					exit={index ? { x: '120%', opacity: 0, y: '-50%' } : {}}
+					initial={index ? { x: '-80%', opacity: 0, y: '-50%' } : {}}
+					transition={{
+						type: 'spring',
+						delay: index ? index * 0.025 : 0,
+						duration: 0.45
+					}}
+				>
 					<Link
 						href={item.link}
 						className={cn(
-							'flex items-center py-2 pr-layout pl-2 transition-colors cursor-pointer gap-5 mt-2',
+							styles.link,
 							pathname === item.link ? styles.active : styles.inactive
 						)}
 					>
 						<item.icon size={22} />
-						<span className='font-light -translate-x-1 text-sm'>
-							{item.name}
-						</span>
+						<span>{item.name}</span>
 					</Link>
-				</div>
+				</m.div>
 			)}
 		</>
 	)

@@ -17,12 +17,7 @@ const Player: FC = () => {
 	const { data } = useTrack()
 
 	return (
-		<div
-			className={cn(
-				styles.player,
-				data && 'relative -bottom-28 duration-300 hidden'
-			)}
-		>
+		<div className={cn(styles.player, data && styles.hiddenPlayer)}>
 			{!data && (
 				<>
 					<PlayerTitle className={styles.title} />

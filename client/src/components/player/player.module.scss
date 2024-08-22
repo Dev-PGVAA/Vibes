@@ -1,9 +1,12 @@
 .player {
 	@apply w-full h-20 p-2 bg-player grid grid-cols-[250px_60px_auto_150px];
+	&.hiddenPlayer {
+		@apply relative -bottom-28 duration-300 hidden;
+	}
 	.title {
 		@apply flex gap-4 items-center;
 		img {
-			@apply ml-4;
+			@apply ml-4 rounded-md;
 		}
 		p {
 			@apply truncate;
@@ -17,6 +20,16 @@
 		}
 		.title {
 			@apply flex gap-1;
+		}
+		.loader1 {
+			@apply w-[60px] h-[60px] rounded-md translate-x-4;
+		}
+		.loader2,
+		.loader3 {
+			@apply h-4 ml-4 rounded w-[120px];
+		}
+		.loader2 {
+			@apply w-[120px] mb-1;
 		}
 	}
 	.slider {
@@ -38,6 +51,12 @@
 		}
 		.playNextButton {
 			@apply rotate-180;
+		}
+		.activeShuffle {
+			@apply stroke-accent;
+		}
+		.activeShuffle {
+			@apply fill-accent;
 		}
 	}
 	.buttons {

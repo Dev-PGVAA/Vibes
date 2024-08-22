@@ -1,6 +1,7 @@
-import cn from 'clsx'
 import type { Dispatch, SetStateAction } from 'react'
 import { TiHeartFullOutline } from 'react-icons/ti'
+
+import styles from './LikeBtn.module.scss'
 
 export function LikeBtn({
 	isLike,
@@ -13,7 +14,7 @@ export function LikeBtn({
 		<button>
 			<TiHeartFullOutline
 				size={32}
-				className={cn('p-[5px] m-1 rounded-full  duration-150')}
+				className={styles.likeButton}
 				fill='transparent'
 				stroke='#ffffff33'
 				strokeWidth={2}

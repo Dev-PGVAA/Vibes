@@ -1,6 +1,8 @@
 import { usePathname } from 'next/navigation'
 import { MdChevronLeft } from 'react-icons/md'
 
+import styles from './GoHistoryBtn.module.scss'
+
 export function GoHistoryBtn({ action }: { action: 'back' | 'forward' }) {
 	const pathname = usePathname()
 
@@ -16,12 +18,12 @@ export function GoHistoryBtn({ action }: { action: 'back' | 'forward' }) {
 	return (
 		<button
 			onClick={() => goHistory()}
-			className='p-[10px] rounded-full hover:bg-white-33 duration-200 bg-white-20'
+			className={styles.historyButton}
 		>
 			<MdChevronLeft
 				size={20}
 				//@ts-ignore
-				className={action === 'forward' && 'rotate-180'}
+				className={action === 'forward' && styles.actionForward}
 			/>
 		</button>
 	)

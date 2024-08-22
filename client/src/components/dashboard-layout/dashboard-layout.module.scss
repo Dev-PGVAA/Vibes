@@ -16,8 +16,32 @@
 			@apply animate-hideSidebar;
 			flex-grow: 0;
 		}
+		.link {
+			@apply flex items-center py-2 pl-2 transition-colors cursor-pointer gap-5 mt-2;
+			span {
+				@apply font-light -translate-x-1 text-sm;
+			}
+		}
+		.nested {
+			@apply flex items-center;
+			.nestedCollapseButton {
+				@apply absolute right-5 translate-y-1;
+			}
+			svg {
+				@apply duration-200;
+				&.activeNestedButton {
+					@apply rotate-180;
+				}
+			}
+		}
+		.nestedMenu {
+			@apply pl-6 duration-150;
+		}
+		.activeNested {
+			@apply text-white;
+		}
 		.inactive {
-			@apply opacity-40 duration-200;
+			@apply text-white opacity-40 duration-200;
 		}
 		.active {
 			@apply border-r-2 border-accent;
@@ -26,6 +50,12 @@
 			@apply py-3 pl-3 relative;
 			* {
 				@apply selection:bg-transparent;
+			}
+			.tooltip {
+				@apply bg-player;
+			}
+			.tootipArrow {
+				@apply fill-player;
 			}
 			header {
 				@apply flex items-center pt-5 pb-7 pl-2;
@@ -44,6 +74,9 @@
 			}
 			.playlists {
 				@apply flex flex-col gap-5;
+				button svg {
+					@apply flex ml-auto;
+				}
 				button,
 				a {
 					@apply flex items-center w-full pr-5 opacity-40 duration-200 hover:opacity-100;

@@ -1,14 +1,13 @@
 import cn from 'clsx'
 import { forwardRef } from 'react'
 
+import styles from './card.module.scss'
+
 const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 	({ className, ...props }, ref) => (
 		<div
 			ref={ref}
-			className={cn(
-				'rounded-xl border shadow border-zinc-800 bg-zinc-950 text-zinc-50',
-				className
-			)}
+			className={cn(styles.card, className)}
 			{...props}
 		/>
 	)
@@ -21,7 +20,7 @@ const CardHeader = forwardRef<
 >(({ className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={cn('flex flex-col space-y-1.5 p-6', className)}
+		className={cn(styles.cardHeader, className)}
 		{...props}
 	/>
 ))
@@ -33,7 +32,7 @@ const CardTitle = forwardRef<
 >(({ className, ...props }, ref) => (
 	<h3
 		ref={ref}
-		className={cn('font-semibold leading-none tracking-tight', className)}
+		className={cn(styles.cardTitle, className)}
 		{...props}
 	/>
 ))
@@ -45,7 +44,7 @@ const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
 	<p
 		ref={ref}
-		className={cn('text-sm text-zinc-500 dark:text-zinc-400', className)}
+		className={cn(styles.cardDescription, className)}
 		{...props}
 	/>
 ))
@@ -57,7 +56,7 @@ const CardContent = forwardRef<
 >(({ className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={cn('p-6 pt-0', className)}
+		className={cn(styles.cardContent, className)}
 		{...props}
 	/>
 ))
@@ -69,7 +68,7 @@ const CardFooter = forwardRef<
 >(({ className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={cn('flex items-center p-6 pt-0', className)}
+		className={cn(styles.cardFooter, className)}
 		{...props}
 	/>
 ))

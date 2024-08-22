@@ -8,6 +8,7 @@ import {
 	TooltipTrigger
 } from '@/components/ui/tooltip/tooltip'
 
+import styles from './DropDownItem.module.scss'
 import type { IHeadingDropdown } from './dropdown.data'
 
 export function DropDownItem({ item }: { item: IHeadingDropdown }) {
@@ -16,7 +17,7 @@ export function DropDownItem({ item }: { item: IHeadingDropdown }) {
 			<Tooltip>
 				<TooltipTrigger>
 					{item.name === 'Logout' ? (
-						<LogoutBtn className='w-5 h-5' />
+						<LogoutBtn className={styles.logout} />
 					) : (
 						<Link href={item.link}>
 							<item.icon size={22} />

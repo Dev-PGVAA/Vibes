@@ -16,6 +16,7 @@ import {
 import { Input } from '@/ui/input/input'
 import { Label } from '@/ui/label/label'
 
+import styles from './genre.module.scss'
 import {
 	CreateGenreDocument,
 	UpdateGenreDocument
@@ -49,9 +50,8 @@ export function GenreModal({
 			},
 			onCompleted() {
 				toast.success('Successfully create genre!')
-				console.log(data)
-				// if (type === 'create-genre' && setDefaultData)
-				// 	setDefaultData(prev => [...prev!, data!.CreateGenre])
+				if (type === 'create-genre' && setDefaultData)
+					setDefaultData(prev => [...prev!, data!.CreateGenre])
 				setIsOpenModal(false)
 				reset()
 			},
@@ -75,7 +75,7 @@ export function GenreModal({
 	}
 
 	return (
-		<Card className='w-[350px]'>
+		<Card className={styles.card}>
 			<CardHeader>
 				<CardTitle>
 					{type === 'create-genre' ? 'Create' : 'Edit'} genre
@@ -86,8 +86,8 @@ export function GenreModal({
 			</CardHeader>
 			<CardContent>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className='grid w-full items-center gap-4'>
-						<div className='flex flex-col space-y-1.5'>
+					<div className={styles.fieldsBox}>
+						<div className={styles.field}>
 							<Label htmlFor='name'>Name</Label>
 							<Input
 								id='name'
@@ -97,7 +97,7 @@ export function GenreModal({
 								})}
 							/>
 						</div>
-						<div className='flex flex-col space-y-1.5'>
+						<div className={styles.field}>
 							<Label htmlFor='framework'>Description</Label>
 							<Textarea
 								id='framework'
@@ -108,8 +108,8 @@ export function GenreModal({
 							/>
 						</div>
 					</div>
-					<p className='text-sm text-red-600'>{error}</p>
-					<div className='flex justify-between mt-5'>
+					<p className={styles.error}>{error}</p>
+					<div className={styles.buttonsBox}>
 						<Button
 							variant='outline'
 							onClick={() => closeModal()}

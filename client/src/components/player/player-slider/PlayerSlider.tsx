@@ -28,7 +28,7 @@ export function PlayerSlider({ className }: { className?: string }) {
 				<div>
 					<button
 						onClick={() => actions.toggleShuffle()}
-						className={cn(player.isShuffle && 'stroke-accent')}
+						className={cn(player.isShuffle && styles.activeShuffle)}
 					>
 						<PiShuffleSimpleLight size={17} />
 					</button>
@@ -54,7 +54,7 @@ export function PlayerSlider({ className }: { className?: string }) {
 					<button onClick={() => actions.toggleRepeat()}>
 						<MdOutlineRepeat
 							size={17}
-							className={cn(audio.isRepeat && 'fill-accent')}
+							className={cn(audio.isRepeat && styles.activeRepeat)}
 						/>
 					</button>
 				</div>

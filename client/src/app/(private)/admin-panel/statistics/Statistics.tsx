@@ -13,7 +13,7 @@ import { getMonth } from '@/utils/date/month'
 import styles from './Statistics.module.scss'
 import { TopicItem } from './topics/TopicItem'
 import { AdminTopics } from './topics/admin-topics.data'
-import { Countries } from './users/contries/Countries'
+import { Countries } from './users/countries/Countries'
 
 interface IRegisterStatistics {
 	month: string
@@ -42,7 +42,7 @@ export function Statistics() {
 			<div className={styles.header}>
 				<div className={styles.greeting}>
 					{isLoading ? (
-						<SkeletonLoader className='w-52 h-12 mb-1 rounded-lg ' />
+						<SkeletonLoader className={styles.loader} />
 					) : (
 						<p>Hello {user?.profile?.name.split(' ')[0]}</p>
 					)}

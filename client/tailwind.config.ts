@@ -63,7 +63,7 @@ const config: Config = {
 			animation: {
 				rotate: 'rotate 0.7s',
 				hideSidebar: 'hideSidebar .35s forwards',
-				showSidebar: 'showSidebar .35s forwards'
+				showSidebar: 'showSidebar .3s forwards'
 			},
 			fontSize: {
 				xs: '0.9rem',

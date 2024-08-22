@@ -20,7 +20,7 @@ const Aside = ({ isHaveAnAccount, setIsHaveAnAccount }: any) => {
 	return (
 		<aside>
 			<div>
-				<div className='header'>
+				<div>
 					<h1>Sign Up Account</h1>
 					<p>Enter your personal data to create account.</p>
 				</div>

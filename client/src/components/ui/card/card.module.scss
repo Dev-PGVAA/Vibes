@@ -1,0 +1,18 @@
+.card {
+	@apply rounded-xl border shadow border-zinc-800 bg-zinc-950 text-zinc-50;
+	.cardHeader {
+		@apply flex flex-col space-y-1.5 p-6;
+	}
+	.cardTitle {
+		@apply font-semibold leading-none tracking-tight;
+	}
+	.cardDescription {
+		@apply text-sm text-zinc-500 dark:text-zinc-400;
+	}
+	.cardContent {
+		@apply p-6 pt-0;
+	}
+	.cardFooter {
+		@apply flex items-center p-6 pt-0;
+	}
+}

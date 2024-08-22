@@ -1,32 +1,15 @@
-.form {
-	@apply bg-[#151515] w-96 p-5 rounded-lg;
-	.header {
-		@apply flex items-center mb-6;
-		p {
-			@apply ml-auto;
-		}
-		h2 {
-			@apply text-2xl;
+.card {
+	@apply w-[350px];
+	.fieldsBox {
+		@apply grid w-full items-center gap-4;
+		.field {
+			@apply flex flex-col space-y-1.5;
 		}
 	}
-	div {
-		@apply mb-8;
-		input,
-		textarea {
-			@apply bg-transparent outline-none border-[2px] rounded-lg py-2 px-5 w-full border-[#ffffff40] text-sm max-h-36 min-h-11;
-		}
-		textarea::-webkit-resizer {
-			display: none;
-		}
-		label {
-			@apply absolute -translate-y-6 text-[#ffffff60] text-xs;
-		}
-		.error {
-			@apply text-sm text-red-600;
-		}
+	.error {
+		@apply text-sm text-red-600;
 	}
-
-	button {
-		@apply bg-accent text-black px-6 py-1 rounded-md;
+	.buttonsBox {
+		@apply flex justify-between mt-5;
 	}
 }

@@ -2,6 +2,12 @@
 	@apply flex items-center px-5;
 	.historyButtons {
 		@apply flex items-center gap-4;
+		.collapse {
+			@apply flex items-center;
+			button {
+				@apply opacity-70 hover:opacity-100 duration-150;
+			}
+		}
 		h1 {
 			@apply text-3xl font-bold;
 		}
@@ -11,8 +17,19 @@
 	}
 	.searchAndProfile {
 		@apply flex ml-auto items-center gap-8;
+		input {
+			&.closed {
+				@apply w-0;
+			}
+			&.open {
+				@apply w-52;
+			}
+		}
 		p:empty {
 			@apply hidden;
+		}
+		.loader {
+			@apply h-10 w-10 rounded-full;
 		}
 	}
 	.photo {
@@ -27,6 +44,9 @@
 	}
 	.searchIcon {
 		@apply cursor-pointer duration-200;
+		&.active {
+			@apply fill-accent;
+		}
 	}
 	.bellIcon {
 		@apply cursor-pointer hover:animate-rotate;
